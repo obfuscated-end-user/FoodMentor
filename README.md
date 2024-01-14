@@ -32,3 +32,4 @@ flask run
 ```
 # TBD
 * obvious code refactoring is obvious and that needs to be done ASAP
+* all code in the jupyter notebooks are not guaranteed to run, maybe do something?

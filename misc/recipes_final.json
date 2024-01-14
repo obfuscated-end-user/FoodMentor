@@ -1,0 +1,978 @@
+{
+    "afritada": {
+        "food": [
+            "kaldereta",
+            "pancit_guisado",
+            "arroz_caldo",
+            "chicken_bistek",
+            "tinola"
+        ],
+        "scores": [
+            0.9773226210727378,
+            0.9754695071935107,
+            0.9744606516883689,
+            0.9744010686029589,
+            0.9740916837933886
+        ]
+    },
+    "arroz_caldo": {
+        "food": [
+            "pancit_palabok",
+            "tinola",
+            "pancit_canton",
+            "laing",
+            "kaldereta"
+        ],
+        "scores": [
+            0.983543313654591,
+            0.9796881445586038,
+            0.979061982238891,
+            0.9786039115034458,
+            0.9779747575374441
+        ]
+    },
+    "bagnet": {
+        "food": [
+            "lechon_kawali",
+            "chicharon",
+            "kare-kare",
+            "calamares",
+            "crispy_pata"
+        ],
+        "scores": [
+            0.9841381056921309,
+            0.9739542073576798,
+            0.971961963782846,
+            0.9572169401052619,
+            0.956357085420666
+        ]
+    },
+    "balut": {
+        "food": [
+            "bibimbap",
+            "longganisa",
+            "ramen",
+            "buko_pie",
+            "burger"
+        ],
+        "scores": [
+            0.8774623019407788,
+            0.868369459875638,
+            0.8681657082314552,
+            0.8676273109027179,
+            0.8649222522518771
+        ]
+    },
+    "bibimbap": {
+        "food": [
+            "ramen",
+            "kare-kare",
+            "calamares",
+            "french_fries",
+            "lasagna"
+        ],
+        "scores": [
+            0.9712064336657162,
+            0.970671682309895,
+            0.9605167709436986,
+            0.9598968680457163,
+            0.9577177309003647
+        ]
+    },
+    "bibingka": {
+        "food": [
+            "cassava_cake",
+            "pancakes",
+            "pizza",
+            "tapsilog",
+            "pandesal"
+        ],
+        "scores": [
+            0.9786586799363933,
+            0.9666992970431469,
+            0.9658088676623212,
+            0.9588917435485237,
+            0.9581355269770324
+        ]
+    },
+    "bicol_express": {
+        "food": [
+            "pancit_canton",
+            "arroz_caldo",
+            "pork_sisig",
+            "pancit_palabok",
+            "tapsilog"
+        ],
+        "scores": [
+            0.968085938873108,
+            0.9669848226352956,
+            0.9660248127950398,
+            0.9650112047404712,
+            0.962792901736969
+        ]
+    },
+    "bistek_tagalog": {
+        "food": [
+            "tapsilog",
+            "pancit_guisado",
+            "pancit_palabok",
+            "chicken_bistek",
+            "pancit_canton"
+        ],
+        "scores": [
+            0.9770641023104587,
+            0.9747317314522481,
+            0.9742983561649156,
+            0.9729489922213357,
+            0.9684681919512825
+        ]
+    },
+    "buko_pie": {
+        "food": [
+            "pandesal",
+            "bibimbap",
+            "cupcakes",
+            "waffles",
+            "pancakes"
+        ],
+        "scores": [
+            0.9759055317837875,
+            0.9563623472972003,
+            0.9526939855162153,
+            0.9516748028247265,
+            0.9480463325590313
+        ]
+    },
+    "bulalo": {
+        "food": [
+            "laing",
+            "arroz_caldo",
+            "pancit_palabok",
+            "sinigang",
+            "afritada"
+        ],
+        "scores": [
+            0.9678622018805535,
+            0.9671196221786703,
+            0.9658624582194492,
+            0.9657783776373368,
+            0.9631637362900157
+        ]
+    },
+    "burger": {
+        "food": [
+            "sushi",
+            "calamares",
+            "pancakes",
+            "tapsilog",
+            "bibimbap"
+        ],
+        "scores": [
+            0.9559830197481405,
+            0.9528148670093656,
+            0.9474284244846332,
+            0.9470205689964015,
+            0.9465124476905344
+        ]
+    },
+    "calamares": {
+        "food": [
+            "lumpia",
+            "pancit_palabok",
+            "kare-kare",
+            "tinola",
+            "pancakes"
+        ],
+        "scores": [
+            0.9693820680605169,
+            0.967437093835811,
+            0.965791973460809,
+            0.965310747601222,
+            0.964510661873356
+        ]
+    },
+    "cassava_cake": {
+        "food": [
+            "bibingka",
+            "pancakes",
+            "pizza",
+            "donuts",
+            "waffles"
+        ],
+        "scores": [
+            0.9786586799363933,
+            0.9602585735407555,
+            0.9596644999083863,
+            0.9586155530030466,
+            0.9569275186267778
+        ]
+    },
+    "champorado": {
+        "food": [
+            "taho",
+            "kare-kare",
+            "pancakes",
+            "pancit_canton",
+            "pancit_palabok"
+        ],
+        "scores": [
+            0.9733727023374085,
+            0.9553227020785615,
+            0.9547608393115904,
+            0.9544841649479828,
+            0.9476597820747148
+        ]
+    },
+    "chicharon": {
+        "food": [
+            "lechon_kawali",
+            "bagnet",
+            "kare-kare",
+            "tinola",
+            "pancit_palabok"
+        ],
+        "scores": [
+            0.9876511294367376,
+            0.9739542073576798,
+            0.9698363729169721,
+            0.9560389204717232,
+            0.9540956845609181
+        ]
+    },
+    "chicken_adobo": {
+        "food": [
+            "tinola",
+            "tapsilog",
+            "pancit_canton",
+            "kare-kare",
+            "pancit_palabok"
+        ],
+        "scores": [
+            0.9798600274302184,
+            0.9784418981108937,
+            0.9765591874131897,
+            0.9759881264285118,
+            0.9758215416471406
+        ]
+    },
+    "chicken_bistek": {
+        "food": [
+            "lasagna",
+            "arroz_caldo",
+            "pancit_palabok",
+            "afritada",
+            "pancit_canton"
+        ],
+        "scores": [
+            0.9776251412613706,
+            0.9770760567097716,
+            0.9758600154199444,
+            0.9744010686029589,
+            0.9743602519585143
+        ]
+    },
+    "chicken_inasal": {
+        "food": [
+            "pizza",
+            "tapa",
+            "siomai",
+            "arroz_caldo",
+            "shawarma"
+        ],
+        "scores": [
+            0.9614384770078765,
+            0.9542526768478252,
+            0.9522961350828144,
+            0.9520227087734442,
+            0.9500802822067972
+        ]
+    },
+    "crispy_pata": {
+        "food": [
+            "bagnet",
+            "lechon_kawali",
+            "chicharon",
+            "kare-kare",
+            "bibimbap"
+        ],
+        "scores": [
+            0.956357085420666,
+            0.94724186872451,
+            0.9427894021405225,
+            0.9387835415922637,
+            0.9322060111483446
+        ]
+    },
+    "cupcakes": {
+        "food": [
+            "pandesal",
+            "buko_pie",
+            "cassava_cake",
+            "bibingka",
+            "waffles"
+        ],
+        "scores": [
+            0.956785684421007,
+            0.9526939855162153,
+            0.9523132483204272,
+            0.9479239124977459,
+            0.9478396572815383
+        ]
+    },
+    "donuts": {
+        "food": [
+            "pancakes",
+            "pizza",
+            "cassava_cake",
+            "bibingka",
+            "waffles"
+        ],
+        "scores": [
+            0.9688514340890132,
+            0.9609170239155571,
+            0.9586155530030466,
+            0.9557815908299826,
+            0.9462810950981658
+        ]
+    },
+    "filipino_spaghetti": {
+        "food": [
+            "pork_sisig",
+            "pork_barbecue",
+            "laing",
+            "arroz_caldo",
+            "lasagna"
+        ],
+        "scores": [
+            0.9690972104930341,
+            0.9674877413701407,
+            0.9667108540471127,
+            0.9629092364055991,
+            0.962062167300417
+        ]
+    },
+    "french_fries": {
+        "food": [
+            "bibimbap",
+            "kare-kare",
+            "lechon_kawali",
+            "ramen",
+            "fried_rice"
+        ],
+        "scores": [
+            0.9598968680457163,
+            0.9597592127816083,
+            0.9522180286914219,
+            0.95070801396673,
+            0.9497570089255403
+        ]
+    },
+    "fried_rice": {
+        "food": [
+            "pancit_guisado",
+            "chicken_adobo",
+            "tapsilog",
+            "tinola",
+            "arroz_caldo"
+        ],
+        "scores": [
+            0.9709245173067207,
+            0.9697704504996123,
+            0.9681119784687408,
+            0.9680422464824487,
+            0.9661045611396222
+        ]
+    },
+    "ginataang_gulay": {
+        "food": [
+            "pinakbet",
+            "pancit_guisado",
+            "pancit_canton",
+            "tapsilog",
+            "kaldereta"
+        ],
+        "scores": [
+            0.9735107115569602,
+            0.9728507818887572,
+            0.9696327358519283,
+            0.9680592576596563,
+            0.966000972164444
+        ]
+    },
+    "halo-halo": {
+        "food": [
+            "ice_cream",
+            "cassava_cake",
+            "bibingka",
+            "turon",
+            "pizza"
+        ],
+        "scores": [
+            0.9374863056870121,
+            0.9133242068841843,
+            0.9123841063468785,
+            0.9039732889638297,
+            0.9030665378346704
+        ]
+    },
+    "hotdog_sandwich": {
+        "food": [
+            "pork_sisig",
+            "filipino_spaghetti",
+            "arroz_caldo",
+            "lasagna",
+            "pork_barbecue"
+        ],
+        "scores": [
+            0.905875531093186,
+            0.8974938755145151,
+            0.896711262218774,
+            0.8965074347761248,
+            0.8960059484530458
+        ]
+    },
+    "hotsilog": {
+        "food": [
+            "tapsilog",
+            "calamares",
+            "kare-kare",
+            "fried_rice",
+            "lumpia"
+        ],
+        "scores": [
+            0.9675613089490844,
+            0.9633636396562559,
+            0.9615186264613276,
+            0.9579099961570057,
+            0.9537718321815936
+        ]
+    },
+    "ice_cream": {
+        "food": [
+            "cassava_cake",
+            "halo-halo",
+            "bibingka",
+            "champorado",
+            "pancakes"
+        ],
+        "scores": [
+            0.9398570654150514,
+            0.9374863056870121,
+            0.9334652228899516,
+            0.9311214077419427,
+            0.9307541397793581
+        ]
+    },
+    "kaldereta": {
+        "food": [
+            "tinola",
+            "pancit_guisado",
+            "pinakbet",
+            "arroz_caldo",
+            "afritada"
+        ],
+        "scores": [
+            0.9859801432684528,
+            0.9828482160005997,
+            0.9788819562833286,
+            0.9779747575374441,
+            0.9773226210727378
+        ]
+    },
+    "kare-kare": {
+        "food": [
+            "lechon_kawali",
+            "pancit_canton",
+            "pancit_palabok",
+            "tapsilog",
+            "chicken_adobo"
+        ],
+        "scores": [
+            0.9783856916020724,
+            0.9781635549669494,
+            0.9773141281490251,
+            0.9770259840530384,
+            0.9759881264285118
+        ]
+    },
+    "kinilaw": {
+        "food": [
+            "arroz_caldo",
+            "laing",
+            "pancit_canton",
+            "tinola",
+            "chicken_bistek"
+        ],
+        "scores": [
+            0.971074763880536,
+            0.96930596924577,
+            0.9651177220945077,
+            0.9631558629261521,
+            0.9630662657363642
+        ]
+    },
+    "laing": {
+        "food": [
+            "arroz_caldo",
+            "pork_sisig",
+            "pancit_palabok",
+            "pancit_guisado",
+            "kinilaw"
+        ],
+        "scores": [
+            0.9786039115034458,
+            0.9743383924643224,
+            0.9713158896103743,
+            0.9699823412000532,
+            0.96930596924577
+        ]
+    },
+    "lasagna": {
+        "food": [
+            "chicken_bistek",
+            "pancit_palabok",
+            "pancit_canton",
+            "arroz_caldo",
+            "kare-kare"
+        ],
+        "scores": [
+            0.9776251412613706,
+            0.9752073443277073,
+            0.9734700728929716,
+            0.9733304054199041,
+            0.9717944363331834
+        ]
+    },
+    "leche_flan": {
+        "food": [
+            "cassava_cake",
+            "waffles",
+            "pancakes",
+            "pandesal",
+            "bibingka"
+        ],
+        "scores": [
+            0.950216274227362,
+            0.9443284526254958,
+            0.9357687703031764,
+            0.9338393373912719,
+            0.931028362463942
+        ]
+    },
+    "lechon_kawali": {
+        "food": [
+            "chicharon",
+            "bagnet",
+            "kare-kare",
+            "sinigang",
+            "pancit_palabok"
+        ],
+        "scores": [
+            0.9876511294367376,
+            0.9841381056921309,
+            0.9783856916020724,
+            0.9629732976242434,
+            0.9627729938776977
+        ]
+    },
+    "liempo": {
+        "food": [
+            "pork_barbecue",
+            "chicken_adobo",
+            "chicken_bistek",
+            "filipino_spaghetti",
+            "bistek_tagalog"
+        ],
+        "scores": [
+            0.9726980138874644,
+            0.9638302478661788,
+            0.9627454278997345,
+            0.9602918408573315,
+            0.9587597124472164
+        ]
+    },
+    "longganisa": {
+        "food": [
+            "lumpia",
+            "sushi",
+            "calamares",
+            "burger",
+            "pandesal"
+        ],
+        "scores": [
+            0.953013067570002,
+            0.9520547892474206,
+            0.9487558242362906,
+            0.94564652071852,
+            0.9438855032608696
+        ]
+    },
+    "lumpia": {
+        "food": [
+            "calamares",
+            "siomai",
+            "tinola",
+            "tapsilog",
+            "kare-kare"
+        ],
+        "scores": [
+            0.9693820680605169,
+            0.9622154061789678,
+            0.9612844945791136,
+            0.960115115596736,
+            0.9597020340350371
+        ]
+    },
+    "pancakes": {
+        "food": [
+            "donuts",
+            "bibingka",
+            "pizza",
+            "calamares",
+            "tapsilog"
+        ],
+        "scores": [
+            0.9688514340890132,
+            0.9666992970431469,
+            0.9659298666477046,
+            0.964510661873356,
+            0.9630043926457375
+        ]
+    },
+    "pancit_canton": {
+        "food": [
+            "pancit_palabok",
+            "tinola",
+            "pancit_guisado",
+            "arroz_caldo",
+            "tapsilog"
+        ],
+        "scores": [
+            0.9870003507598134,
+            0.9799992947069972,
+            0.9793280893857357,
+            0.979061982238891,
+            0.9784492363724092
+        ]
+    },
+    "pancit_guisado": {
+        "food": [
+            "tinola",
+            "kaldereta",
+            "pinakbet",
+            "pancit_canton",
+            "pancit_palabok"
+        ],
+        "scores": [
+            0.9836402764968579,
+            0.9828482160005997,
+            0.981706576832193,
+            0.9793280893857357,
+            0.9780358774657992
+        ]
+    },
+    "pancit_palabok": {
+        "food": [
+            "pancit_canton",
+            "arroz_caldo",
+            "tapsilog",
+            "pancit_guisado",
+            "kare-kare"
+        ],
+        "scores": [
+            0.9870003507598134,
+            0.983543313654591,
+            0.9795248669775037,
+            0.9780358774657992,
+            0.9773141281490251
+        ]
+    },
+    "pandesal": {
+        "food": [
+            "buko_pie",
+            "bibingka",
+            "cupcakes",
+            "pancakes",
+            "waffles"
+        ],
+        "scores": [
+            0.9759055317837875,
+            0.9581355269770324,
+            0.956785684421007,
+            0.9558757379856127,
+            0.9529238668304294
+        ]
+    },
+    "pinakbet": {
+        "food": [
+            "pancit_guisado",
+            "kaldereta",
+            "ginataang_gulay",
+            "tinola",
+            "sinigang"
+        ],
+        "scores": [
+            0.981706576832193,
+            0.9788819562833286,
+            0.9735107115569602,
+            0.972707237421786,
+            0.9687616739105842
+        ]
+    },
+    "pizza": {
+        "food": [
+            "pancakes",
+            "bibingka",
+            "shawarma",
+            "tapsilog",
+            "chicken_inasal"
+        ],
+        "scores": [
+            0.9659298666477046,
+            0.9658088676623212,
+            0.9642454423333243,
+            0.9623521219144996,
+            0.9614384770078765
+        ]
+    },
+    "pork_adobo": {
+        "food": [
+            "chicken_adobo",
+            "pork_sisig",
+            "pancit_canton",
+            "chicken_bistek",
+            "laing"
+        ],
+        "scores": [
+            0.9476637060994207,
+            0.9455597940385337,
+            0.9451898390044421,
+            0.9449988682676299,
+            0.9430374095225864
+        ]
+    },
+    "pork_barbecue": {
+        "food": [
+            "shawarma",
+            "liempo",
+            "pancit_palabok",
+            "tapa",
+            "filipino_spaghetti"
+        ],
+        "scores": [
+            0.9735268309841077,
+            0.9726980138874644,
+            0.9694642139872044,
+            0.968310238646717,
+            0.9674877413701407
+        ]
+    },
+    "pork_sisig": {
+        "food": [
+            "laing",
+            "arroz_caldo",
+            "pancit_palabok",
+            "filipino_spaghetti",
+            "pork_barbecue"
+        ],
+        "scores": [
+            0.9743383924643224,
+            0.9710263041877921,
+            0.9692697043273822,
+            0.9690972104930341,
+            0.9666987082349994
+        ]
+    },
+    "ramen": {
+        "food": [
+            "pancit_guisado",
+            "kare-kare",
+            "bibimbap",
+            "chicken_adobo",
+            "pancit_canton"
+        ],
+        "scores": [
+            0.9749828227896842,
+            0.9732202413521128,
+            0.9712064336657162,
+            0.9697662742260234,
+            0.9687714926590155
+        ]
+    },
+    "shawarma": {
+        "food": [
+            "pork_barbecue",
+            "pancit_palabok",
+            "lasagna",
+            "pizza",
+            "tapsilog"
+        ],
+        "scores": [
+            0.9735268309841077,
+            0.9647561416817743,
+            0.9645695317142822,
+            0.9642454423333243,
+            0.9626611721032095
+        ]
+    },
+    "sinigang": {
+        "food": [
+            "pancit_guisado",
+            "tinola",
+            "kare-kare",
+            "arroz_caldo",
+            "pancit_palabok"
+        ],
+        "scores": [
+            0.9747803911934899,
+            0.9741107182382942,
+            0.9738099579634332,
+            0.9737782940124821,
+            0.9730873045983902
+        ]
+    },
+    "siomai": {
+        "food": [
+            "pancit_guisado",
+            "lumpia",
+            "pancit_palabok",
+            "arroz_caldo",
+            "tapa"
+        ],
+        "scores": [
+            0.9655095085416114,
+            0.9622154061789678,
+            0.9621683324835756,
+            0.9598596656349843,
+            0.9593302902374855
+        ]
+    },
+    "sushi": {
+        "food": [
+            "pancit_palabok",
+            "afritada",
+            "calamares",
+            "burger",
+            "kare-kare"
+        ],
+        "scores": [
+            0.9593514283145538,
+            0.9566266743843335,
+            0.9562911019671223,
+            0.9559830197481405,
+            0.9552889911204743
+        ]
+    },
+    "taho": {
+        "food": [
+            "champorado",
+            "kare-kare",
+            "pancit_canton",
+            "pancakes",
+            "tinola"
+        ],
+        "scores": [
+            0.9733727023374085,
+            0.9522335973900437,
+            0.9487418076735337,
+            0.9440907917000577,
+            0.941978539059498
+        ]
+    },
+    "tapa": {
+        "food": [
+            "pancit_palabok",
+            "pork_barbecue",
+            "chicken_bistek",
+            "lasagna",
+            "tapsilog"
+        ],
+        "scores": [
+            0.9735356053771687,
+            0.968310238646717,
+            0.9668127558640828,
+            0.9663434657494946,
+            0.9660770266085291
+        ]
+    },
+    "tapsilog": {
+        "food": [
+            "pancit_palabok",
+            "pancit_canton",
+            "chicken_adobo",
+            "bistek_tagalog",
+            "kare-kare"
+        ],
+        "scores": [
+            0.9795248669775037,
+            0.9784492363724092,
+            0.9784418981108937,
+            0.9770641023104587,
+            0.9770259840530384
+        ]
+    },
+    "tinola": {
+        "food": [
+            "kaldereta",
+            "pancit_guisado",
+            "pancit_canton",
+            "chicken_adobo",
+            "arroz_caldo"
+        ],
+        "scores": [
+            0.9859801432684528,
+            0.9836402764968579,
+            0.9799992947069972,
+            0.9798600274302184,
+            0.9796881445586038
+        ]
+    },
+    "tocino": {
+        "food": [
+            "tapa",
+            "pizza",
+            "siomai",
+            "donuts",
+            "cassava_cake"
+        ],
+        "scores": [
+            0.9577347389208094,
+            0.9461960991302304,
+            0.9426743176414857,
+            0.9413560611707745,
+            0.9409434315343347
+        ]
+    },
+    "turon": {
+        "food": [
+            "sushi",
+            "calamares",
+            "lumpia",
+            "buko_pie",
+            "pandesal"
+        ],
+        "scores": [
+            0.939063719387704,
+            0.936057948337257,
+            0.935241616992101,
+            0.9312045325908105,
+            0.9308800123343982
+        ]
+    },
+    "waffles": {
+        "food": [
+            "cassava_cake",
+            "pandesal",
+            "pancakes",
+            "buko_pie",
+            "cupcakes"
+        ],
+        "scores": [
+            0.9569275186267778,
+            0.9529238668304294,
+            0.9521469595235232,
+            0.9516748028247265,
+            0.9478396572815383
+        ]
+    }
+}

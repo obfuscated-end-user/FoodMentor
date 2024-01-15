@@ -1,6 +1,6 @@
 # Introduction
 FoodSnap is a web application that tries to predict food recipes and ingredients, based on the image you give it to. Machine learning concepts and natural language processing techniques are used to accomplish this.  
-It uses HTML, JavaScript and CSS for the website, and Python 3.11.5 for the backend, with the help of [Flask](https://flask.palletsprojects.com/en/3.0.x), [PyTorch](https://pytorch.org/), [spaCy](https://spacy.io/) and [HuggingFace's Transformers](https://huggingface.co/docs/transformers) libraries.  
+It uses HTML, JavaScript and CSS for the website, and Python 3.11.5 for the backend, with the help of [Flask](https://flask.palletsprojects.com/en/3.0.x), [PyTorch](https://pytorch.org), [spaCy](https://spacy.io) and [HuggingFace's Transformers](https://huggingface.co/docs/transformers) libraries.  
 
 You can visit the working web application [here](https://tinyurl.com/foodsnap2023).
 # How to run:

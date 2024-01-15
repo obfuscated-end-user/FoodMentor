@@ -3,7 +3,7 @@ FoodSnap is a web application that tries to predict food recipes and ingredients
 It uses HTML, JavaScript and CSS for the website, and Python 3.11.5 for the backend, with the help of [Flask](https://flask.palletsprojects.com/en/3.0.x), [PyTorch](https://pytorch.org), [spaCy](https://spacy.io) and [HuggingFace's Transformers](https://huggingface.co/docs/transformers) libraries.  
 
 You can visit the working web application [here](https://tinyurl.com/foodsnap2023).
-# How to run:
+# Instructions
 1. Open the command line in the current directory:
 	- If you're on Windows, right click, then select "Open in terminal".
 2. Enter the following. This will create a [virtual environment](https://docs.python.org/3/library/venv.html).

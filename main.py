@@ -12,15 +12,16 @@ from werkzeug.utils import secure_filename
 THIS_FOLDER = Path(__file__).parent.resolve()
 UPLOAD_FOLDER = f"{THIS_FOLDER}/food_images"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
+methods = ["GET", "POST"]
 
-app = Flask(__name__, static_url_path="/food_images")
+app = Flask(__name__, static_url_path="/static")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/", methods=["GET", "POST"])
-@app.route("/home", methods=["GET", "POST"])
+@app.route("/", methods=methods)
+@app.route("/home", methods=methods)
 def upload_file():
     try:
         for file in os.listdir(UPLOAD_FOLDER):
@@ -42,11 +43,15 @@ def upload_file():
             return redirect(url_for("download_file", name=filename))
     return render_template("index.html")
 
+global img_path_for_display
+
 def classify_image():
+    global img_path_for_display
     model_name = "schrodingers-kitten/dlsud-food-v1"
     food_classifier = pipeline(model=model_name)
     path = f"{os.path.dirname(os.path.realpath(__file__))}/food_images"
     image = f"{path}/{os.listdir(path)[0]}"
+    img_path_for_display = f"/food_images/{os.listdir(path)[0]}"
     result = food_classifier(image)
     s(p)
     r = ls(ds(result))
@@ -68,10 +73,11 @@ def classify_image():
     r[1]["score"] = r2
     return ds(r)
 
-@app.route("/results/<name>")
+@app.route("/results/<name>", methods=methods)
 def download_file(name):
+    global img_path_for_display
     output = classify_image()
-    return render_template("result.html", output=output)
+    return render_template("result.html", output=output, img_path_for_display=img_path_for_display, name=name)
 
 if __name__ == "__main__":
     app.run()

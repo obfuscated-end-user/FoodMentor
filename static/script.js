@@ -1,12 +1,12 @@
 try {
-    console.log("Made by:\nREDACTED\tredacted123@redacted.com\nREDACTED\tredacted456@redacted.com\nREDACTED\tredacted789@redacted.com");
+    console.log("If the page doesn't work as intended, it may be your browser acting up.");
 
     const body = document.body;
     body.classList.toggle(sessionStorage.getItem("mode"));
 
     const submitButton = document.getElementById("submit-button");
     const imageForm = document.getElementById("image-form");
-    const selectImage = document.querySelector(".select-image");
+    // const selectImage = document.querySelector(".select-image"); // related to the double prompt problem
     const inputFile = document.querySelector("#file");
     const imgArea = document.querySelector(".img-area");
     const pageModeToggle = document.querySelector(".page-mode-toggle");
@@ -16,7 +16,7 @@ try {
     window.addEventListener("load", function() {
         submitButton.disabled = true;
         inputFile.reset();
-    })
+    });
 
     function toggleDarkMode(){
         body.classList.toggle("dark-mode");
@@ -163,5 +163,5 @@ try {
         document.getElementById("image-form").reset();
     }
 } catch (error) {
-    console.error("something went wrong lol\nignore the errors");
+    console.error("An unexpected error occurred.");
 }

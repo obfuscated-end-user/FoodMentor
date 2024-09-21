@@ -9,11 +9,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Aclonica&display=swap" rel="stylesheet">
         <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
         <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}" async></script>
-        <title>NutriVision: Home</title>
+        <title>FoodMentor: Home</title>
     </head>
     <body>
         <div class="logo">
-            <h1>NutriVision</h1>
+            <h1>FoodMentor</h1>
         </div>
 
         <button class="dark-mode-toggle" onclick="toggleDarkMode()">
@@ -24,17 +24,97 @@
             <span class="toggle-icon">📱</span>
             <span class="mode-text"><strong>Snap Page</strong></span>
         </button>
-
+        
         <section class="snap-section">
             <div class="container slide-in-blurred-top">
                 <form id="image-form" method="post" enctype="multipart/form-data">
-                    <div class="img-area" data-img="">
-                        <i class="bx bxs-cloud-upload icon"></i>
-                        <h3>Upload Image</h3>
-                        <p>Upload an image with the food of your choice.</p>
-                    </div>
-                    <input class="select-image" title="Click this button to upload an image file." type="file" id="file" name="file" accept=".png, .jpg, .jpeg"><br>
-                    <input class="select-image" id="submit-button" type="submit" value="Please upload an image." disabled>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="img-area" data-img="">
+                                    <i class="bx bxs-cloud-upload icon"></i>
+                                    <h3>Upload Image</h3>
+                                    <p>Upload an image with the food of your choice.</p>
+                                </div>
+                                <input class="select-image" title="Click this button to upload an image file." type="file" id="file" name="file" accept=".png, .jpg, .jpeg"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2>Restrictions (currently non-functional)</h2><br><br>
+                                <table id="restrictions-row-table">
+                                    <tr>
+                                        <td>
+                                            <!-- get user age if possible -->
+                                            <label for="user-age">Enter your age:</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="number" name="user-age" id="user-age" value="20" style="width: 100%"><br><br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><h3>Presets</h3></td>
+                                        <td>
+                                            <input type="radio" id="preset-vegan" name="preset" value="1">
+                                            <label for="preset-vegan">Vegan/vegetarian</label><br>
+                                            <input type="radio" id="preset-pescatarian" name="preset" value="1">
+                                            <label for="preset-pescatarian">Pescatarian</label><br>
+                                            <input type="radio" id="preset-halal" name="preset" value="1">
+                                            <label for="preset-halal">abstains from pork</label><br>
+                                        </td>
+                                        <td>
+                                            <button id="set-presets-btn" type="button">Set</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Notify if food contains:</th>
+                                        <th>Allergic to:</th>
+                                        <th>Other:</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <!-- CHECKBOXES -->
+                                            <!-- check for the value attr because that's what gets sent in the form -->
+                                            <!-- res - restriction -->
+                                            <input type="checkbox" id="res-pork" name="res-pork" value="1">
+                                            <label for="res-pork">Pork</label><br>
+                                            <input type="checkbox" id="res-beef" name="res-beef" value="1">
+                                            <label for="res-beef">Beef</label><br>
+                                            <input type="checkbox" id="res-chicken" name="res-chicken" value="1">
+                                            <label for="res-chicken">Chicken</label><br>
+                                            <input type="checkbox" id="res-fish" name="res-fish" value="1">
+                                            <label for="res-fish">Fish</label><br>
+                                            <input type="checkbox" id="res-sugar" name="res-sugar" value="1">
+                                            <label for="res-sugar">Sugar</label><br>
+                                        </td>
+                                        <td>
+                                            <!-- ale - allergy -->
+                                            <input type="checkbox" id="ale-milk" name="ale-milk" value="1">
+                                            <label for="ale-milk">Milk</label><br>
+                                            <input type="checkbox" id="ale-nuts" name="ale-nuts" value="1">
+                                            <label for="ale-nuts">Nuts</label><br>
+                                            <input type="checkbox" id="ale-wheat" name="ale-wheat" value="1">
+                                            <label for="ale-wheat">Wheat</label><br>
+                                            <input type="checkbox" id="ale-shellfish" name="ale-shellfish" value="1">
+                                            <label for="ale-shellfish">Shellfish</label><br>
+                                        </td>
+                                        <td>
+                                            <!-- oth - others -->
+                                            <input type="checkbox" id="oth-diabetic" name="oth-diabetic" value="1">
+                                            <label for="oth-diabetic">Diabetic</label><br>
+                                            <input type="checkbox" id="oth-lactose" name="oth-lactose" value="1">
+                                            <label for="oth-lactose">Lactose intolerant</label><br>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="select-image" id="submit-button" type="submit" value="Please upload an image." disabled>
+                            </td>
+                        </tr>
+                    </table>
                 </form>
             </div>
         </section>
@@ -71,18 +151,20 @@
 
         <footer>
             <table>
-                <th>Made by:</th>
                 <tr>
-                    <td class="contact-name">REDACTED</td>
-                    <td><a class="contact-email" href="mailto:redacted123@redacted.com">redacted123@redacted.com</a></td>
+                    <th>Made by:</th>
                 </tr>
                 <tr>
-                    <td class="contact-name">REDACTED</td>
-                    <td><a class="contact-email" href="mailto:redacted456@redacted.com">redacted456@redacted.com</a></td>
+                    <td class="contact-name">{{ n1 }}</td>
+                    <td><a class="contact-email" href="mailto:{{ e1 }}">{{ e1 }}</a></td>
                 </tr>
                 <tr>
-                    <td class="contact-name">REDACTED</td>
-                    <td><a class="contact-email" href="mailto:redacted789@redacted.com">redacted789@redacted.com</a></td>
+                    <td class="contact-name">{{ n2 }}</td>
+                    <td><a class="contact-email" href="mailto:{{ e2 }}">{{ e2 }}</a></td>
+                </tr>
+                <tr>
+                    <td class="contact-name">{{ n3 }}</td>
+                    <td><a class="contact-email" href="mailto:{{ e3 }}">{{ e3 }}</a></td>
                 </tr>
             </table>
         </footer>

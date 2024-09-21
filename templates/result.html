@@ -9,70 +9,106 @@
         <link href="https://fonts.googleapis.com/css2?family=Aclonica&display=swap" rel="stylesheet">
         <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
         <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}" async></script>
-        <title>NutriVision: image results</title>
+        <title>FoodMentor: image results</title>
     </head>
     <body>
         <div class="logo">
-            <h1>NutriVision</h1>
+            <h1>FoodMentor</h1>
         </div>
         <button class="dark-mode-toggle" onclick="toggleDarkMode()">
             <span class="toggle-icon">🌞</span>
             <span class="mode-text"><strong>Light Mode</strong></span>
         </button>
-        <span id="hidden-output">{{ output }}</span>
+        <span class="hidden" style="display: none;">
+            <span id="hidden-output-forms">{{ output_forms }}</span>
+
+            <!-- ingredients and recipes -->
+            <span id="recipe-1">{{ ir1 }}</span>
+            <span id="recipe-2">{{ ir2 }}</span>
+            <span id="recipe-3">{{ ir3 }}</span>
+            <span id="recipe-4">{{ ir4 }}</span>
+            <span id="recipe-5">{{ ir5 }}</span>
+
+            <!-- similar result -->
+            <span id="simres-1">{{ s1 }}</span>
+            <span id="simres-2">{{ s2 }}</span>
+            <span id="simres-3">{{ s3 }}</span>
+            <span id="simres-4">{{ s4 }}</span>
+            <span id="simres-5">{{ s5 }}</span>
+        </span>
         <div class="container-results">
             <h1>Predictions and results</h1><br><br>
+
             <div class="user-image">
                 <img id="user-image" src="{{ img_path_for_display }}" title="{{ name }}" alt="user-provided image"><br><br>
             </div>
             <div class="predictions">
                 <hr class="solid"><br><br>
                 <h2>Best prediction:</h2><br>
-                <h3 id="prediction-1"></h3><button class="details-button" type="button" onclick="viewDetails(1)">Details</button><span id="accuracy-1">1</span><br><br><br>
+                <h3 id="pred-1">{{ pred_1_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred1, recipe1, simres1)">Details</button><span id="accuracy-1">{{ pred_1_scr }}%</span><br><br><br>
                 <hr class="solid"><br><br>
 
                 <h2>Other predictions:</h2>
                 <strong><a id="show-hide-other-predictions" onclick="showHideOtherPredictions()">(show)</a></strong><br><br>
                 <span id="other-predictions">
-                    <h3 id="prediction-2"></h3><button class="details-button" type="button" onclick="viewDetails(2)">Details</button><span id="accuracy-2">2</span>
-                    <h3 id="prediction-3"></h3><button class="details-button" type="button" onclick="viewDetails(3)">Details</button><span id="accuracy-3">3</span>
-                    <h3 id="prediction-4"></h3><button class="details-button" type="button" onclick="viewDetails(4)">Details</button><span id="accuracy-4">4</span>
-                    <h3 id="prediction-5"></h3><button class="details-button" type="button" onclick="viewDetails(5)">Details</button><span id="accuracy-5">5</span><br><br><br>
+                    <h3 id="pred-2">{{ pred_2_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred2, recipe2, simres2)">Details</button><span id="accuracy-2">{{ pred_2_scr }}%</span>
+                    <h3 id="pred-3">{{ pred_3_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred3, recipe3, simres3)">Details</button><span id="accuracy-3">{{ pred_3_scr }}%</span>
+                    <h3 id="pred-4">{{ pred_4_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred4, recipe4, simres4)">Details</button><span id="accuracy-4">{{ pred_4_scr }}%</span>
+                    <h3 id="pred-5">{{ pred_5_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred5, recipe5, simres5)">Details</button><span id="accuracy-5">{{ pred_5_scr }}%</span><br><br><br>
                 </span>
+
                 <hr class="solid"><br><br><br>
 
-                <h2 id="ingredients-and-recipe-header"></h2><br>
-                <span id="ingredients-and-recipe"></span><br><br><br>
+                <h2 id="ingredients-and-recipe-header">Ingredients and recipe for: {{ pred_1_lbl }}</h2><br>
+                <span id="ingredients-and-recipe">
+                    {{ ir1|safe }}
+                </span><br><br><br> <!-- closing span tag here is labeled as stray by the browser for some reason -->
+
                 <hr class="solid"><br><br><br>
-                <h2 id="similar-foods-header"></h2>
+
+                <h2 id="similar-foods-header">Foods similar to {{ pred_1_lbl }} (based on the similarity of the recipes):</h2>
                 <strong><a id="show-hide-similar-foods" onclick="showHideSimilarFoods()">(show)</a></strong><br><br>
                 <span id="similar-foods">
-                    <span id="similar-1"></span><br>
-                    <span id="similar-2"></span><br>
-                    <span id="similar-3"></span><br>
-                    <span id="similar-4"></span><br>
-                    <span id="similar-5"></span>
+                    <span id="similar-1">1</span><br>
+                    <span id="similar-2">2</span><br>
+                    <span id="similar-3">3</span><br>
+                    <span id="similar-4">4</span><br>
+                    <span id="similar-5">5</span>
                 </span><br><br><br>
+
+                <h2 id="dietary-restrictions-header">Dietary restrictions</h2>
+                <span id="dietary-restrictions">
+                    you can probably insert another section here for data related to user restrictions. for example, if food contains food and user says they're lactose intolerant, it should say "food contains milk", and other stuff.<br><br><br>
+                    <!-- make a giant if statement, and make it hard to read.<br> -->
+                </span>
             </div>
             <a id="go-back-anchor" href="{{ url_for('upload_file') }}"><button class="select-image" onclick="goBack()">Try another image</button></a>
         </div>
         <footer>
             <table>
-                <th>Made by:</th>
                 <tr>
-                    <td class="contact-name">REDACTED</td>
-                    <td><a class="contact-email" href="mailto:redacted123@redacted.com">redacted123@redacted.com</a></td>
+                    <th>Made by:</th>
                 </tr>
                 <tr>
-                    <td class="contact-name">REDACTED</td>
-                    <td><a class="contact-email" href="mailto:redacted456@redacted.com">redacted456@redacted.com</a></td>
+                    <td class="contact-name">{{ n1 }}</td>
+                    <td><a class="contact-email" href="mailto:{{ e1 }}">{{ e1 }}</a></td>
                 </tr>
                 <tr>
-                    <td class="contact-name">REDACTED</td>
-                    <td><a class="contact-email" href="mailto:redacted789@redacted.com">redacted789@redacted.com</a></td>
+                    <td class="contact-name">{{ n2 }}</td>
+                    <td><a class="contact-email" href="mailto:{{ e2 }}">{{ e2 }}</a></td>
+                </tr>
+                <tr>
+                    <td class="contact-name">{{ n3 }}</td>
+                    <td><a class="contact-email" href="mailto:{{ e3 }}">{{ e3 }}</a></td>
                 </tr>
             </table>
         </footer>
         <script type="text/javascript" src="{{ url_for('static', filename='analyze.js') }}" defer></script>
     </body>
 </html>
+
+<!--
+things to do:
+details button needs to accustom to the new no-big-json-in-file format
+i don't think you need the similar foods thing, replace it with the new lactose intolerance thing
+-->

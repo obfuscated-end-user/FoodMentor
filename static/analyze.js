@@ -32,6 +32,9 @@ let similar3 = document.getElementById("similar-3");
 let similar4 = document.getElementById("similar-4");
 let similar5 = document.getElementById("similar-5");
 
+let hiddenOutputForms = document.getElementById("hidden-output-forms");
+let resJSONString = document.getElementById("res");
+
 function showHideOtherPredictions() {
     var otherPredictions = document.getElementById("other-predictions");
     var showHideOtherPredictionsAnchor = document.getElementById("show-hide-other-predictions");
@@ -71,6 +74,21 @@ function fsfp(pos, simres) {
     return `<h3>${pos}. ${simres["food"][y]}</h3>similarity: ${csfp(y, simres)}%`;
 }
 
+function viewRestrictions(pred, res) {
+    // do something like
+    // if some keys exist in `res` that res.json has for the current food
+    // display something
+
+    resJSON = JSON.parse(resJSONString.innerHTML.replaceAll("'", '"'));
+    console.log(resJSON);
+
+    if(res["user-age"]) {
+        console.log(res["user-age"]);
+    } else {
+        console.log("you provided no age value");
+    }
+}
+
 function viewDetails(prediction, recipe, simres) {
     // you can use `prediction` as key for the JSON?
 
@@ -84,6 +102,14 @@ function viewDetails(prediction, recipe, simres) {
     similarFoodsHeader.innerHTML = `Foods similar to ${prediction.innerHTML} (based on the similarity of the recipes):`;
 
     s = JSON.parse(simres.innerHTML);
+
+    // PREFERENCES PROTOTYPE
+    // MAKE A FOOD-TAGS JSON AND LOAD IT HERE
+    resUser = JSON.parse(hiddenOutputForms.innerHTML.replaceAll("'", '"'));
+
+    viewRestrictions(prediction, resUser);
+
+    // defenestrate r & s dot jason from torvalds-land eyes
 
     similar1.innerHTML = fsfp(1, s);
     similar2.innerHTML = fsfp(2, s);

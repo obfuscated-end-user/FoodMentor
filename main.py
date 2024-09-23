@@ -69,7 +69,7 @@ global img_path_for_display
 
 def classify_image():
     global img_path_for_display
-    model_name = "schrodingers-kitten/dlsud-food-v1"
+    model_name = "x36Uqx5lycyxhlFrLDSzTwsC8oEVLVhA"
     food_classifier = pipeline(model=model_name)
     path = f"{os.path.dirname(os.path.realpath(__file__))}/food_images"
     image = f"{path}/{os.listdir(path)[0]}"
@@ -134,6 +134,10 @@ def download_file(name):
     with open(s_json_url, encoding="utf8") as f:
         s_json = json.load(f)
 
+    res_json_url = os.path.join(STATIC_FOLDER, "res.json")
+    with open(res_json_url, encoding="utf8") as f:
+        res_json = json.load(f)
+
     return render_template("result.html", output_forms=output_forms,
                            img_path_for_display=img_path_for_display, name=name,
                            pred_1_lbl=fmt_lbl(output[0]["label"]),
@@ -162,6 +166,7 @@ def download_file(name):
                            e2=contact_json["2"]["email"],
                            n3=contact_json["3"]["name"],
                            e3=contact_json["3"]["email"],
+                           res_json=res_json,
                            visibility="hidden")
 if __name__ == "__main__":
     # app.run(debug=True)

@@ -64,7 +64,7 @@ h1 {
 /* 2024-09-19 */
 .container table {
     /* DEBUG RED LINES */
-    border: 1px solid red;
+    /* border: 1px solid red; */
     text-align: left;
 }
 
@@ -425,7 +425,7 @@ th {
 }
 
 #restrictions-row-table td {
-    border: 1px solid red;
+    /* border: 1px solid lawngreen; */
     padding: 5px;
     text-align: left;
     vertical-align: top;

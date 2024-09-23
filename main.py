@@ -23,13 +23,16 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["TEMPLATES_AUTO_RELOAD"] = True # comment out this line when app is deployed
 
 global output_forms_temp
+global img_path_for_display
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 contact_url = os.path.join(STATIC_FOLDER, "contact.json")
 with open(contact_url, encoding="utf8") as f:
     contact_json = json.load(f)
+
 
 @app.route("/", methods=methods)
 @app.route("/home", methods=methods)
@@ -65,7 +68,6 @@ def upload_file():
                            n3=contact_json["3"]["name"],
                            e3=contact_json["3"]["email"],)
 
-global img_path_for_display
 
 def classify_image():
     global img_path_for_display
@@ -98,16 +100,20 @@ def classify_image():
     # return ds(r)
     return r
 
+
 def fmt_lbl(l):
     return l.replace("_", " ")
+
 
 def fmt_scr(s):
     lf = 100_000_000
     sf = 1_000_000
     return (round((s + float_info.epsilon) * lf) / sf)
 
+
 def f_s(s):
     return str(s).replace("'", '"')
+
 
 @app.route("/results/<name>", methods=methods)
 def download_file(name):
@@ -168,6 +174,8 @@ def download_file(name):
                            e3=contact_json["3"]["email"],
                            res_json=res_json,
                            visibility="hidden")
+
+
 if __name__ == "__main__":
     # app.run(debug=True)
     app.run()

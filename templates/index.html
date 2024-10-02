@@ -41,7 +41,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <h2>Restrictions (currently non-functional)</h2><br><br>
+                                <h2>Restrictions</h2><br><br>
                                 <table id="restrictions-row-table">
                                     <tr>
                                         <td>
@@ -55,15 +55,17 @@
                                     <tr>
                                         <td><h3>Presets</h3></td>
                                         <td>
+                                            <input type="radio" id="preset-none" name="preset" value="1" checked>
+                                            <label for="preset-none">(none)</label><br>
                                             <input type="radio" id="preset-vegan" name="preset" value="1">
                                             <label for="preset-vegan">Vegan/vegetarian</label><br>
                                             <input type="radio" id="preset-pescatarian" name="preset" value="1">
                                             <label for="preset-pescatarian">Pescatarian</label><br>
-                                            <input type="radio" id="preset-halal" name="preset" value="1">
-                                            <label for="preset-halal">abstains from pork</label><br>
+                                            <!-- <input type="radio" id="preset-halal" name="preset" value="1">
+                                            <label for="preset-halal">abstains from pork</label><br> -->
                                         </td>
                                         <td>
-                                            <button id="set-presets-btn" type="button">Set</button>
+                                            <button id="set-presets-btn" type="button" onclick="setPreset()">Set</button>
                                         </td>
                                     </tr>
                                     <tr>

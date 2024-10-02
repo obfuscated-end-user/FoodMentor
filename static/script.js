@@ -1,6 +1,36 @@
 try {
     console.log("If the page doesn't work as intended, it may be your browser acting up.");
 
+    // checkboxes and radio buttons
+    let presetNone = document.getElementById("preset-none")
+    let presetVegan = document.getElementById("preset-vegan");
+    let presetPescatarian = document.getElementById("preset-pescatarian");
+    let resPork = document.getElementById("res-pork");
+    let resBeef = document.getElementById("res-beef");
+    let resChicken = document.getElementById("res-chicken");
+    let resFish = document.getElementById("res-fish");
+    let resSugar = document.getElementById("res-sugar");
+    let aleMilk = document.getElementById("ale-milk");
+    let aleNuts = document.getElementById("ale-nuts");
+    let aleWheat = document.getElementById("ale-wheat");
+    let aleShellfish = document.getElementById("ale-shellfish");
+    let othDiabetic = document.getElementById("oth-diabetic");
+    let othLactose = document.getElementById("oth-lactose");
+
+    let checkBoxArray = [
+        resPork,
+        resBeef,
+        resChicken,
+        resFish,
+        resSugar,
+        aleMilk,
+        aleNuts,
+        aleWheat,
+        aleShellfish,
+        othDiabetic,
+        othLactose
+    ];
+
     const body = document.body;
     body.classList.toggle(sessionStorage.getItem("mode"));
 
@@ -161,6 +191,29 @@ try {
         window.history.go(-1);
         window.location.reload(true);
         document.getElementById("image-form").reset();
+    }
+
+    function setPreset() {
+        if (presetPescatarian.checked) {
+            for (let checkbox of checkBoxArray) {
+                checkbox.checked = false;
+            }
+            resFish.checked = true;
+            aleShellfish.checked = true;
+        } if (presetVegan.checked) {
+            for (let checkbox of checkBoxArray) {
+                checkbox.checked = false;
+            }
+            resPork.checked = true;
+            resBeef.checked = true;
+            resChicken.checked = true;
+            resFish.checked = true;
+            aleShellfish.checked = true;
+        } if (presetNone.checked) {
+            for (let checkbox of checkBoxArray) {
+                checkbox.checked = false;
+            }
+        }
     }
 } catch (error) {
     console.error("An unexpected error occurred.");

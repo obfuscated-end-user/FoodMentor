@@ -16,7 +16,7 @@ let recipe5 = document.getElementById("recipe-5");
 let ingredientsAndRecipeHeader = document.getElementById("ingredients-and-recipe-header");
 let ingredientsAndRecipe = document.getElementById("ingredients-and-recipe");
 
-// similar result (nlp)
+// similar result
 let simres1 = document.getElementById("simres-1");
 let simres2 = document.getElementById("simres-2");
 let simres3 = document.getElementById("simres-3");
@@ -34,6 +34,8 @@ let similar5 = document.getElementById("similar-5");
 
 let hiddenOutputForms = document.getElementById("hidden-output-forms");
 let resJSONString = document.getElementById("res");
+
+let dietaryRestrictions = document.getElementById("dietary-restrictions");
 
 function showHideOtherPredictions() {
     var otherPredictions = document.getElementById("other-predictions");
@@ -61,17 +63,24 @@ function showHideSimilarFoods() {
 }
 showHideSimilarFoods();
 
-function csfp(pos, simres) {
-    // compute similar foods percentages
-    let lf = 100000000; // large factor
-    let sf = 1000000;   // small factor
-    return Math.round((simres["scores"][pos] + Number.EPSILON) * lf) / sf;
+function showHideDietaryRestrictions() {
+    var dietaryRestrictions = document.getElementById("dietary-restrictions");
+    var showHidedietaryRestrictions = document.getElementById("show-hide-dietary-restrictions");
+    if (dietaryRestrictions.style.display == "none") {
+        dietaryRestrictions.style.display = "block";
+        showHidedietaryRestrictions.innerHTML = "(hide)";
+    } else {
+        dietaryRestrictions.style.display = "none";
+        showHidedietaryRestrictions.innerHTML = "(show)";
+    }
 }
+showHideDietaryRestrictions();
 
-function fsfp(pos, simres) {
-    // format similar foods percentages
-    y = pos - 1;
-    return `<h3>${pos}. ${simres["food"][y]}</h3>similarity: ${csfp(y, simres)}%`;
+// do something similar to dietary preferences
+// showHideDietaryPreferences();
+
+function containsProperty(prop, pred) {
+    return (res.hasOwnProperty(prop) && resJSON[pred.innerHTML.replaceAll(" ", "_")].includes(prop));
 }
 
 function viewRestrictions(pred, res) {
@@ -79,18 +88,81 @@ function viewRestrictions(pred, res) {
     // if some keys exist in `res` that res.json has for the current food
     // display something
 
-    resJSON = JSON.parse(resJSONString.innerHTML.replaceAll("'", '"'));
-    console.log(resJSON);
+    let resJSON = JSON.parse(resJSONString.innerHTML.replaceAll("'", '"'));
+    let resultList = document.createElement("list");
+    let predString = pred.innerHTML.replaceAll(" ", "_");
 
-    if(res["user-age"]) {
+    // clear this every time the button is clicked/tapped
+    dietaryRestrictions.innerHTML = "";
+
+    // dietaryRestrictions.style.margin = "0";
+    // dietaryRestrictions.style.padding = "0";
+
+    // AGE TEST
+    // think of something to do with the age variable
+    if (res["user-age"]) {
         console.log(res["user-age"]);
+        // const spanAge = document.createTextNode();
+        // let ageResult = `<b>AGE TEST ${res["user-age"]}</b>`;
+        // resultList.innerHTML = resultList.innerHTML + ageResult;
     } else {
         console.log("you provided no age value");
     }
+
+    function containsProperty(prop) {
+        return res.hasOwnProperty(prop) && resJSON[predString].includes(prop);
+    }
+
+    let prop = [
+        "res-pork",
+        "res-beef",
+        "res-chicken",
+        "res-fish",
+        "res-sugar",
+        "ale-milk",
+        "ale-nuts",
+        "ale-wheat",
+        "ale-shellfish",
+        "oth-diabetic",
+        "oth-lactose"
+    ];
+
+    for (var p in prop) {
+        if (containsProperty(prop[p])) {
+            if (prop[p] === "oth-diabetic") {
+                let e = document.createElement("li");
+                e.innerHTML = "<b>This product is not suitable for people with diabetes.</b>";
+                resultList.append(e);
+            } else if (prop[p] === "oth-lactose") {
+                let e = document.createElement("li");
+                e.innerHTML = "<b>This product contains milk, and should not be consumed by people who are lactose intolerant.</b>";
+                resultList.append(e);
+            } else {
+                let e = document.createElement("li");
+                e.innerHTML = `<b>This product contains ${prop[p].substring(4)}.</b>`;
+                resultList.append(e);
+            }
+        }
+    }
+
+    dietaryRestrictions.appendChild(resultList);
 }
 
 function viewDetails(prediction, recipe, simres) {
     // you can use `prediction` as key for the JSON?
+
+    function csfp(pos, simres) {
+        // compute similar foods percentages
+        let lf = 100000000; // large factor
+        let sf = 1000000;   // small factor
+        return Math.round((simres["scores"][pos] + Number.EPSILON) * lf) / sf;
+    }
+    
+    function fsfp(pos, simres) {
+        // format similar foods percentages
+        y = pos - 1;
+        return `<h3>${pos}. ${simres["food"][y]}</h3>similarity: ${csfp(y, simres)}%`;
+    }
 
     // name of the food
     // replaceAll() is needed to actually render it as HTML

@@ -363,12 +363,12 @@ button#trash-btn {
     display: none;
 }
 
-#show-hide-other-predictions, #show-hide-similar-foods, .contact-email {
+#show-hide-other-predictions, #show-hide-similar-foods, #show-hide-dietary-restrictions, .contact-email {
     color: #3cbd44;
     cursor: pointer;
 }
 
-#show-hide-other-predictions:hover, #show-hide-similar-foods:hover, .contact-email:hover {
+#show-hide-other-predictions:hover, #show-hide-similar-foods:hover, #show-hide-dietary-restrictions:hover, .contact-email:hover {
     color: #77c17c;
 }
 

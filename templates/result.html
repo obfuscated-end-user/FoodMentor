@@ -35,6 +35,9 @@
             <span id="simres-3">{{ s3 }}</span>
             <span id="simres-4">{{ s4 }}</span>
             <span id="simres-5">{{ s5 }}</span>
+
+            <!-- restrictions -->
+            <span id="res">{{ res_json }}</span>
         </span>
         <div class="container-results">
             <h1>Predictions and results</h1><br><br>
@@ -77,9 +80,9 @@
                 </span><br><br><br>
 
                 <h2 id="dietary-restrictions-header">Dietary restrictions</h2>
+                <strong><a id="show-hide-dietary-restrictions" onclick="showHideDietaryRestrictions()">(show)</a></strong><br><br>
                 <span id="dietary-restrictions">
                     you can probably insert another section here for data related to user restrictions. for example, if food contains food and user says they're lactose intolerant, it should say "food contains milk", and other stuff.<br><br><br>
-                    <!-- make a giant if statement, and make it hard to read.<br> -->
                 </span>
             </div>
             <a id="go-back-anchor" href="{{ url_for('upload_file') }}"><button class="select-image" onclick="goBack()">Try another image</button></a>

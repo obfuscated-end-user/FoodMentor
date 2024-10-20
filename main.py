@@ -119,16 +119,12 @@ def f_s(s):
 def download_file(name):
     global img_path_for_display
     global output_forms_temp
-
-    # new strat: this hides the big ass json at your script
-    # yes i know its messy
     
     # predictions and percentages
     output = classify_image()
 
     # dietary restriction
     output_forms = output_forms_temp.to_dict(flat=True)
-    print(output_forms)
 
     # ingredients and recipes
     r_json_url = os.path.join(STATIC_FOLDER, "r.json")

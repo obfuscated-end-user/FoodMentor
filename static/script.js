@@ -5,28 +5,36 @@ try {
     let presetNone = document.getElementById("preset-none")
     let presetVegan = document.getElementById("preset-vegan");
     let presetPescatarian = document.getElementById("preset-pescatarian");
+    let presetAll = document.getElementById("preset-all");
+
     let resPork = document.getElementById("res-pork");
     let resBeef = document.getElementById("res-beef");
     let resChicken = document.getElementById("res-chicken");
     let resFish = document.getElementById("res-fish");
     let resSugar = document.getElementById("res-sugar");
+
+    let aleEggs = document.getElementById("ale-eggs");
     let aleMilk = document.getElementById("ale-milk");
     let aleNuts = document.getElementById("ale-nuts");
-    let aleWheat = document.getElementById("ale-wheat");
     let aleShellfish = document.getElementById("ale-shellfish");
+    let aleSoy = document.getElementById("ale-soy");
+    let aleWheat = document.getElementById("ale-wheat");
+
     let othDiabetic = document.getElementById("oth-diabetic");
     let othLactose = document.getElementById("oth-lactose");
 
     let checkBoxArray = [
-        resPork,
         resBeef,
         resChicken,
         resFish,
+        resPork,
         resSugar,
+        aleEggs,
         aleMilk,
         aleNuts,
-        aleWheat,
         aleShellfish,
+        aleSoy,
+        aleWheat,
         othDiabetic,
         othLactose
     ];
@@ -213,8 +221,31 @@ try {
             for (let checkbox of checkBoxArray) {
                 checkbox.checked = false;
             }
+        } if (presetAll.checked) {
+            // debug
+            for (let checkbox of checkBoxArray) {
+                checkbox.checked = true;
+            }
         }
     }
+
+    function z(kl) {
+        let i, k = "";
+        let c = "";
+        for (i = 0x0021; i < 0x007F; i++) {c = c + String.fromCharCode(i);}
+        /* for (i = 0x0021; i < 0x2B58; i++) {c = c + String.fromCharCode(i);}
+        for (i = 0x333A; i < 0x33CD; i++) {c = c + String.fromCharCode(i);}
+        for (i = 0x02B9; i < 0x0385; i++) {c = c + String.fromCharCode(i);} */
+    
+        for (i = 0; i < kl; i++)
+            k += c.substr(Math.floor((Math.random() * c.length) + 1), 1);
+        return k;
+    }
+
+    // .repeat(Math.floor(Math.random() * 25) + 1)
+    for (i = 0; i < 10; i++)
+        console.log(z(Math.floor(Math.random() * 500) + 1));
+
 } catch (error) {
     console.error("An unexpected error occurred.");
 }

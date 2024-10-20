@@ -64,7 +64,6 @@ function showHideSimilarFoods() {
 showHideSimilarFoods();
 
 function showHideDietaryRestrictions() {
-    var dietaryRestrictions = document.getElementById("dietary-restrictions");
     var showHidedietaryRestrictions = document.getElementById("show-hide-dietary-restrictions");
     if (dietaryRestrictions.style.display == "none") {
         dietaryRestrictions.style.display = "block";
@@ -95,9 +94,6 @@ function viewRestrictions(pred, res) {
     // clear this every time the button is clicked/tapped
     dietaryRestrictions.innerHTML = "";
 
-    // dietaryRestrictions.style.margin = "0";
-    // dietaryRestrictions.style.padding = "0";
-
     // AGE TEST
     // think of something to do with the age variable
     if (res["user-age"]) {
@@ -113,33 +109,106 @@ function viewRestrictions(pred, res) {
         return res.hasOwnProperty(prop) && resJSON[predString].includes(prop);
     }
 
-    let prop = [
-        "res-pork",
+    let resArray = [
         "res-beef",
         "res-chicken",
         "res-fish",
-        "res-sugar",
+        "res-pork",
+        "res-sugar"
+    ];
+
+    let aleArray = [
+        "ale-eggs",
         "ale-milk",
         "ale-nuts",
-        "ale-wheat",
         "ale-shellfish",
+        "ale-soy",
+        "ale-wheat"
+    ];
+
+    let othArray = [
         "oth-diabetic",
         "oth-lactose"
     ];
 
-    for (var p in prop) {
-        if (containsProperty(prop[p])) {
-            if (prop[p] === "oth-diabetic") {
+    // res
+    let restrictionUl = document.createElement("ul");
+    restrictionUl.style = "list-style-type: none;";
+    // the only time this will remain false is if the for loop matches no properties
+    let showRestrictionBool = false;
+
+    for (var prop in resArray) {
+        if (containsProperty(resArray[prop])) {
+            let e = document.createElement("li");
+            e.innerHTML = `<b><span style="color: red;">${resArray[prop].substring(4)}</span></b>`;
+            restrictionUl.append(e);
+            showRestrictionBool = true;
+        }
+    }
+
+    if (showRestrictionBool) {
+        let restrictionHeader = document.createElement("li");
+        restrictionHeader.innerHTML = "<h3>This product contains:</h3>";
+        resultList.appendChild(restrictionHeader);
+        let liContainingUl = document.createElement("li")
+        liContainingUl.style = "list-style-type: none;";
+        liContainingUl.appendChild(restrictionUl);
+        resultList.appendChild(liContainingUl);
+        dietaryRestrictions.appendChild(resultList);
+    } else {
+        console.log("NONE");
+    }
+
+    /*
+    MAKE A PROPERTY THAT CONTAINS ALL OPTIONS FOR DEBUGGING PURPOSES
+    DEBUG
+    "ice_cream":["res-sugar", "ale-milk", "ale-eggs", "ale-wheat"],
+    ORIGINAL
+    "ice_cream":["res-sugar", "ale-milk"],
+    */
+
+    // ale
+    let allergenUl = document.createElement("ul");
+    allergenUl.style = "list-style-type: none;";
+    let showAllergenBool = false;
+    
+    for (var prop in aleArray) {
+        if (containsProperty(aleArray[prop])) {
+            console.log(containsProperty(aleArray[prop]), prop);
+            let e = document.createElement("li");
+            e.innerHTML = `<b><span style="color: red;">${aleArray[prop].substring(4)}</span></b>`;
+            allergenUl.append(e);
+            showAllergenBool = true;
+        }
+    }
+
+    if (showAllergenBool) {
+        let allergenHeader = document.createElement("li");
+        allergenHeader.innerHTML = "<h3>Allergen information. This food contains:</h3>";
+        resultList.appendChild(allergenHeader);
+        let liContainingUl = document.createElement("li")
+        liContainingUl.style = "list-style-type: none;";
+        liContainingUl.appendChild(allergenUl);
+        resultList.appendChild(liContainingUl);
+        dietaryRestrictions.appendChild(resultList);
+    } else {
+        console.log("NONE");
+    }
+
+    // others
+    for (var prop in othArray) {
+        if (containsProperty(othArray[prop])) {
+            if (othArray[prop] === "oth-diabetic") {
                 let e = document.createElement("li");
                 e.innerHTML = "<b>This product is not suitable for people with diabetes.</b>";
                 resultList.append(e);
-            } else if (prop[p] === "oth-lactose") {
+            } else if (othArray[prop] === "oth-lactose") {
                 let e = document.createElement("li");
                 e.innerHTML = "<b>This product contains milk, and should not be consumed by people who are lactose intolerant.</b>";
                 resultList.append(e);
             } else {
                 let e = document.createElement("li");
-                e.innerHTML = `<b>This product contains ${prop[p].substring(4)}.</b>`;
+                e.innerHTML = `<b>Default others: ${othArray[prop].substring(4)}</b>`;
                 resultList.append(e);
             }
         }

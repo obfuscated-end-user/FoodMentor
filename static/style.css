@@ -436,6 +436,34 @@ th {
     text-align: center;
 }
 
+.nf {
+    width: 60%;
+    font-family: Helvetica, Arial sans-serif;
+    border: 1px solid black;
+    padding: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nf td {
+    border-bottom: 1px solid black;
+}
+.nf-header {
+    margin: -50;
+}
+.nf-right {
+    text-align: right;
+}
+.nf-left {
+    text-indent: 1em each-line;
+}
+.nf-bar {
+    color: black;
+    background-color: black;
+}
+.nf-footer {
+    font-size: small;
+}
+
 /*
 .slide-in-blurred-top {
 	-webkit-animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;

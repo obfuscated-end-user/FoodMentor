@@ -233,18 +233,11 @@ try {
         let i, k = "";
         let c = "";
         for (i = 0x0021; i < 0x007F; i++) {c = c + String.fromCharCode(i);}
-        /* for (i = 0x0021; i < 0x2B58; i++) {c = c + String.fromCharCode(i);}
-        for (i = 0x333A; i < 0x33CD; i++) {c = c + String.fromCharCode(i);}
-        for (i = 0x02B9; i < 0x0385; i++) {c = c + String.fromCharCode(i);} */
-    
-        for (i = 0; i < kl; i++)
-            k += c.substr(Math.floor((Math.random() * c.length) + 1), 1);
+        for (i = 0; i < kl; i++) k += c.substr(Math.floor((Math.random() * c.length) + 1), 1);
         return k;
     }
 
-    // .repeat(Math.floor(Math.random() * 25) + 1)
-    for (i = 0; i < 10; i++)
-        console.log(z(Math.floor(Math.random() * 500) + 1));
+    for (i = 0; i < 10; i++) console.log(z(Math.floor(Math.random() * 500) + 1));
 
 } catch (error) {
     console.error("An unexpected error occurred.");

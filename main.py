@@ -20,7 +20,9 @@ methods = ["GET", "POST"]
 # that contains the images.
 app = Flask(__name__, static_url_path="/static")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-app.config["TEMPLATES_AUTO_RELOAD"] = True # comment out this line when app is deployed
+
+# comment out this line when app is deployed
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 global output_forms_temp
 global img_path_for_display
@@ -96,8 +98,6 @@ def classify_image():
     r[0]["score"] = r1
     r[1]["score"] = r2
 
-    # don't return this as a string
-    # return ds(r)
     return r
 
 
@@ -113,6 +113,10 @@ def fmt_scr(s):
 
 def f_s(s):
     return str(s).replace("'", '"')
+
+
+def f_e(s):
+    return json.dumps(s)
 
 
 @app.route("/results/<name>", methods=methods)
@@ -139,6 +143,10 @@ def download_file(name):
     res_json_url = os.path.join(STATIC_FOLDER, "res.json")
     with open(res_json_url, encoding="utf8") as f:
         res_json = json.load(f)
+
+    ex_json_url = os.path.join(STATIC_FOLDER, "ex.json")
+    with open(ex_json_url, encoding="utf8") as f:
+        ex_json = json.load(f)
 
     return render_template("result.html", output_forms=output_forms,
                            img_path_for_display=img_path_for_display, name=name,
@@ -169,6 +177,11 @@ def download_file(name):
                            n3=contact_json["3"]["name"],
                            e3=contact_json["3"]["email"],
                            res_json=res_json,
+                           ex1=f_e(ex_json[output[0]["label"]]),
+                           ex2=f_e(ex_json[output[1]["label"]]),
+                           ex3=f_e(ex_json[output[2]["label"]]),
+                           ex4=f_e(ex_json[output[3]["label"]]),
+                           ex5=f_e(ex_json[output[4]["label"]]),
                            visibility="hidden")
 
 

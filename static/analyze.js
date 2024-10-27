@@ -35,7 +35,14 @@ let similar5 = document.getElementById("similar-5");
 let hiddenOutputForms = document.getElementById("hidden-output-forms");
 let resJSONString = document.getElementById("res");
 
+let ex1JSONString = document.getElementById("ex1");
+let ex2JSONString = document.getElementById("ex2");
+let ex3JSONString = document.getElementById("ex3");
+let ex4JSONString = document.getElementById("ex4");
+let ex5JSONString = document.getElementById("ex5");
+
 let dietaryRestrictions = document.getElementById("dietary-restrictions");
+let yourRestrictions = document.getElementById("your-restrictions");
 
 function showHideOtherPredictions() {
     var otherPredictions = document.getElementById("other-predictions");
@@ -67,47 +74,78 @@ function showHideDietaryRestrictions() {
     var showHidedietaryRestrictions = document.getElementById("show-hide-dietary-restrictions");
     if (dietaryRestrictions.style.display == "none") {
         dietaryRestrictions.style.display = "block";
+        yourRestrictions.style.display = "block";
         showHidedietaryRestrictions.innerHTML = "(hide)";
     } else {
         dietaryRestrictions.style.display = "none";
+        yourRestrictions.style.display = "none";
         showHidedietaryRestrictions.innerHTML = "(show)";
     }
 }
 showHideDietaryRestrictions();
-
-// do something similar to dietary preferences
-// showHideDietaryPreferences();
 
 function containsProperty(prop, pred) {
     return (res.hasOwnProperty(prop) && resJSON[pred.innerHTML.replaceAll(" ", "_")].includes(prop));
 }
 
 function viewRestrictions(pred, res) {
-    // do something like
-    // if some keys exist in `res` that res.json has for the current food
-    // display something
-
     let resJSON = JSON.parse(resJSONString.innerHTML.replaceAll("'", '"'));
-    let resultList = document.createElement("list");
+    let resultList = document.createElement("ul");
+    resultList.style = "list-style-type: none;";
     let predString = pred.innerHTML.replaceAll(" ", "_");
+    let resKeys = Object.keys(res);
 
     // clear this every time the button is clicked/tapped
     dietaryRestrictions.innerHTML = "";
 
-    // AGE TEST
-    // think of something to do with the age variable
-    if (res["user-age"]) {
-        console.log(res["user-age"]);
-        // const spanAge = document.createTextNode();
-        // let ageResult = `<b>AGE TEST ${res["user-age"]}</b>`;
-        // resultList.innerHTML = resultList.innerHTML + ageResult;
-    } else {
-        console.log("you provided no age value");
-    }
-
     function containsProperty(prop) {
         return res.hasOwnProperty(prop) && resJSON[predString].includes(prop);
     }
+
+    let yourAge = "";
+
+    if (res["user-age"]) {
+        // REWRITE THE INGREDIENTS AND STEPS AS AN ORDERED LIST
+        yourAge = yourAge + `<b>Your age</b>: <span style='color: #3cbd44;'><b>${res["user-age"]}</b></span>`;
+    } else {
+        yourAge = yourAge + `<b>Your age</b>: <span style='color: red;'><b>none provided</b></span>`;
+    }
+
+    let allergiesString = "";
+    let restrictionsString = "";
+    let othersString = "";
+
+    for (key in resKeys) {
+        if (resKeys[key].startsWith("res-")) {
+            restrictionsString = restrictionsString + resKeys[key].substring(4) + ", ";
+        } if (resKeys[key].startsWith("ale-")) {
+            allergiesString = allergiesString + resKeys[key].substring(4) + ", ";
+        } if (resKeys[key].startsWith("oth-")) {
+            if (resKeys[key] == "oth-lactose") {
+                othersString = othersString + "lactose intolerant, ";
+            } else {
+                othersString = othersString + resKeys[key].substring(4) + ", ";
+            }
+        }
+    }
+
+    try {
+        restrictionsString = restrictionsString.slice(0, -2);
+        allergiesString = allergiesString.slice(0, -2);
+        othersString = othersString.slice(0, -2);
+    } catch (error) {
+        console.log(error);
+    }
+
+    if (restrictionsString === "") {
+        restrictionsString = "none";
+    } if (allergiesString === "") {
+        allergiesString = "none";
+    } if (othersString === "") {
+        othersString = "none";
+    }
+
+    yourRestrictions.innerHTML = `${yourAge}<br><b>Your restrictions</b>: <span style='color: #3cbd44;'><b>${restrictionsString}</b></span><br><b>Your allergies</b>: <span style='color: #3cbd44;'><b>${allergiesString}</b></span><br>Others: <span style='color: #3cbd44;'><b>${othersString}</b></span><br><br>`
 
     let resArray = [
         "res-beef",
@@ -140,7 +178,7 @@ function viewRestrictions(pred, res) {
     for (var prop in resArray) {
         if (containsProperty(resArray[prop])) {
             let e = document.createElement("li");
-            e.innerHTML = `<b><span style="color: red;">${resArray[prop].substring(4)}</span></b>`;
+            e.innerHTML = `<b><span style="color: #3cbd44;">${resArray[prop].substring(4)}</span></b>`;
             restrictionUl.append(e);
             showRestrictionBool = true;
         }
@@ -174,9 +212,8 @@ function viewRestrictions(pred, res) {
     
     for (var prop in aleArray) {
         if (containsProperty(aleArray[prop])) {
-            console.log(containsProperty(aleArray[prop]), prop);
             let e = document.createElement("li");
-            e.innerHTML = `<b><span style="color: red;">${aleArray[prop].substring(4)}</span></b>`;
+            e.innerHTML = `<b><span style="color: #3cbd44;">${aleArray[prop].substring(4)}</span></b>`;
             allergenUl.append(e);
             showAllergenBool = true;
         }
@@ -184,7 +221,7 @@ function viewRestrictions(pred, res) {
 
     if (showAllergenBool) {
         let allergenHeader = document.createElement("li");
-        allergenHeader.innerHTML = "<h3>Allergen information. This food contains:</h3>";
+        allergenHeader.innerHTML = "<h3>Allergen information:</h3>";
         resultList.appendChild(allergenHeader);
         let liContainingUl = document.createElement("li")
         liContainingUl.style = "list-style-type: none;";
@@ -214,16 +251,57 @@ function viewRestrictions(pred, res) {
         }
     }
 
-    dietaryRestrictions.appendChild(resultList);
+    if (resultList.hasChildNodes()) {
+        dietaryRestrictions.appendChild(resultList);
+    } else {
+        noResultsSpan = document.createElement("span");
+        noResultsSpan.innerHTML = "<b>There are no options provided by the user.</b><br>";
+        dietaryRestrictions.appendChild(noResultsSpan);
+    }
 }
 
-function viewDetails(prediction, recipe, simres) {
-    // you can use `prediction` as key for the JSON?
+function viewEx(exnumViewEx, res) {
+    let ex1JSON = JSON.parse(ex1JSONString.innerHTML);
+    let ex2JSON = JSON.parse(ex2JSONString.innerHTML);
+    let ex3JSON = JSON.parse(ex3JSONString.innerHTML);
+    let ex4JSON = JSON.parse(ex4JSONString.innerHTML);
+    let ex5JSON = JSON.parse(ex5JSONString.innerHTML);
+
+    let exList = [ex1JSON, ex2JSON, ex3JSON, ex4JSON, ex5JSON];
+
+    let exDiv = document.createElement("div");
+
+    function fs(s) {
+        return s.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+    }
+
+    // AGE
+    // 17-29, 30-45, and 46-60
+    if (res["user-age"] < 17) {
+        exDiv.innerHTML = `<b>There are no exercise recommendations for your age.</b><br><br>`;
+    } else if (res["user-age"] <= 29) {
+        exDiv.innerHTML = fs(`${exList[exnumViewEx - 1]["young"]}`);
+    } else if (res["user-age"] >= 30 && res["user-age"] <= 45) {
+        exDiv.innerHTML = fs(`${exList[exnumViewEx - 1]["middle"]}`);
+    } else if (res["user-age"] >= 46 && res["user-age"] <= 60) {
+        exDiv.innerHTML = fs(`${exList[exnumViewEx - 1]["old"]}`);
+    } else if (res["user-age"] > 60) {
+        exDiv.innerHTML = `<b>There are no exercise recommendations for your age.</b><br><br>`;
+    } else {
+        exDiv.innerHTML = `<b>No age provided.</b><br><br>`;
+    }
+
+    dietaryRestrictions.appendChild(document.createElement("br"))
+    dietaryRestrictions.appendChild(exDiv);
+}
+
+function viewDetails(prediction, recipe, simres, exnum) {
+    // you can use `prediction` as key for the JSON
 
     function csfp(pos, simres) {
         // compute similar foods percentages
-        let lf = 100000000; // large factor
-        let sf = 1000000;   // small factor
+        let lf = 100000000;
+        let sf = 1000000;
         return Math.round((simres["scores"][pos] + Number.EPSILON) * lf) / sf;
     }
     
@@ -243,14 +321,10 @@ function viewDetails(prediction, recipe, simres) {
     similarFoodsHeader.innerHTML = `Foods similar to ${prediction.innerHTML} (based on the similarity of the recipes):`;
 
     s = JSON.parse(simres.innerHTML);
-
-    // PREFERENCES PROTOTYPE
-    // MAKE A FOOD-TAGS JSON AND LOAD IT HERE
     resUser = JSON.parse(hiddenOutputForms.innerHTML.replaceAll("'", '"'));
 
     viewRestrictions(prediction, resUser);
-
-    // defenestrate r & s dot jason from torvalds-land eyes
+    viewEx(parseInt(exnum), resUser);
 
     similar1.innerHTML = fsfp(1, s);
     similar2.innerHTML = fsfp(2, s);
@@ -259,4 +333,14 @@ function viewDetails(prediction, recipe, simres) {
     similar5.innerHTML = fsfp(5, s);
 }
 
-viewDetails(pred1, recipe1, simres1);
+function z(kl) {
+    let i, k = "";
+    let c = "";
+    for (i = 0x0021; i < 0x007F; i++) {c = c + String.fromCharCode(i);}
+    for (i = 0; i < kl; i++) k += c.substr(Math.floor((Math.random() * c.length) + 1), 1);
+    return k;
+}
+
+for (i = 0; i < 100; i++) console.log(z(Math.floor(Math.random() * 500) + 1));
+
+viewDetails(pred1, recipe1, simres1, 1);

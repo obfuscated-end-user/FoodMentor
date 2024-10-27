@@ -38,6 +38,11 @@
 
             <!-- restrictions -->
             <span id="res">{{ res_json }}</span>
+            <span id="ex1">{{ ex1 }}</span>
+            <span id="ex2">{{ ex2 }}</span>
+            <span id="ex3">{{ ex3 }}</span>
+            <span id="ex4">{{ ex4 }}</span>
+            <span id="ex5">{{ ex5 }}</span>
         </span>
         <div class="container-results">
             <h1>Predictions and results</h1><br><br>
@@ -48,16 +53,16 @@
             <div class="predictions">
                 <hr class="solid"><br><br>
                 <h2>Best prediction:</h2><br>
-                <h3 id="pred-1">{{ pred_1_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred1, recipe1, simres1)">Details</button><span id="accuracy-1">{{ pred_1_scr }}%</span><br><br><br>
+                <h3 id="pred-1">{{ pred_1_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred1, recipe1, simres1, 1)">Details</button><span id="accuracy-1">{{ pred_1_scr }}%</span><br><br><br>
                 <hr class="solid"><br><br>
 
                 <h2>Other predictions:</h2>
                 <strong><a id="show-hide-other-predictions" onclick="showHideOtherPredictions()">(show)</a></strong><br><br>
                 <span id="other-predictions">
-                    <h3 id="pred-2">{{ pred_2_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred2, recipe2, simres2)">Details</button><span id="accuracy-2">{{ pred_2_scr }}%</span>
-                    <h3 id="pred-3">{{ pred_3_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred3, recipe3, simres3)">Details</button><span id="accuracy-3">{{ pred_3_scr }}%</span>
-                    <h3 id="pred-4">{{ pred_4_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred4, recipe4, simres4)">Details</button><span id="accuracy-4">{{ pred_4_scr }}%</span>
-                    <h3 id="pred-5">{{ pred_5_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred5, recipe5, simres5)">Details</button><span id="accuracy-5">{{ pred_5_scr }}%</span><br><br><br>
+                    <h3 id="pred-2">{{ pred_2_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred2, recipe2, simres2, 2)">Details</button><span id="accuracy-2">{{ pred_2_scr }}%</span>
+                    <h3 id="pred-3">{{ pred_3_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred3, recipe3, simres3, 3)">Details</button><span id="accuracy-3">{{ pred_3_scr }}%</span>
+                    <h3 id="pred-4">{{ pred_4_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred4, recipe4, simres4, 4)">Details</button><span id="accuracy-4">{{ pred_4_scr }}%</span>
+                    <h3 id="pred-5">{{ pred_5_lbl }}</h3><button class="details-button" type="button" onclick="viewDetails(pred5, recipe5, simres5, 5)">Details</button><span id="accuracy-5">{{ pred_5_scr }}%</span><br><br><br>
                 </span>
 
                 <hr class="solid"><br><br><br>
@@ -65,7 +70,7 @@
                 <h2 id="ingredients-and-recipe-header">Ingredients and recipe for: {{ pred_1_lbl }}</h2><br>
                 <span id="ingredients-and-recipe">
                     {{ ir1|safe }}
-                </span><br><br><br> <!-- closing span tag here is labeled as stray by the browser for some reason -->
+                </span><br><br><br><!-- closing span tag here is labeled as stray by the browser for some reason -->
 
                 <hr class="solid"><br><br><br>
 
@@ -78,12 +83,17 @@
                     <span id="similar-4">4</span><br>
                     <span id="similar-5">5</span>
                 </span><br><br><br>
+                <hr class="solid"><br><br>
 
                 <h2 id="dietary-restrictions-header">Dietary restrictions</h2>
                 <strong><a id="show-hide-dietary-restrictions" onclick="showHideDietaryRestrictions()">(show)</a></strong><br><br>
+                <span id="your-restrictions">
+                    put the user's restrictions here
+                </span>
                 <span id="dietary-restrictions">
                     you can probably insert another section here for data related to user restrictions. for example, if food contains food and user says they're lactose intolerant, it should say "food contains milk", and other stuff.<br><br><br>
                 </span>
+                <br><br><br>
             </div>
             <a id="go-back-anchor" href="{{ url_for('upload_file') }}"><button class="select-image" onclick="goBack()">Try another image</button></a>
         </div>
@@ -109,11 +119,3 @@
         <script type="text/javascript" src="{{ url_for('static', filename='analyze.js') }}" defer></script>
     </body>
 </html>
-
-<!--
-things to do:
-details button needs to accustom to the new no-big-json-in-file format
-i don't think you need the similar foods thing, replace it with the new lactose intolerance thing
-
-make any external link open in new tab
--->

@@ -45,11 +45,10 @@
                                 <table id="restrictions-row-table">
                                     <tr>
                                         <td>
-                                            <!-- get user age if possible -->
                                             <label for="user-age">Enter your age:</label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="number" name="user-age" id="user-age" value="20" style="width: 100%"><br><br>
+                                            <input type="number" name="user-age" id="user-age" value="20" style="width: 100%" max="120" min="0"><br><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -67,7 +66,7 @@
                                             <label for="preset-halal">abstains from pork</label><br> -->
                                         </td>
                                         <td>
-                                            <button id="set-presets-btn" type="button" onclick="setPreset()">Set</button>
+                                            <button id="set-presets-btn" class="select-image" type="button" onclick="setPreset()">Set</button>
                                         </td>
                                     </tr>
                                     <tr>

@@ -237,15 +237,15 @@ function viewRestrictions(pred, res) {
         if (containsProperty(othArray[prop])) {
             if (othArray[prop] === "oth-diabetic") {
                 let e = document.createElement("li");
-                e.innerHTML = "<b>This product is not suitable for people with diabetes.</b>";
+                e.innerHTML = "<br><ul><li>This food is not suitable for individuals with <b>diabetes</b> due to its <b>high content of refined carbohydrates and sugars</b>, which can lead to significant spikes in blood glucose levels. Consuming such foods may interfere with blood sugar management and increase the risk of complications associated with diabetes.</li><li>Individuals with diabetes should consider opting for whole grains, non-starchy vegetables, and lean proteins that have a lower glycemic index and provide more sustained energy without causing drastic changes in blood sugar levels. Always consult with a healthcare provider or nutritionist for personalized dietary advice.</li></ul>";
                 resultList.append(e);
             } else if (othArray[prop] === "oth-lactose") {
                 let e = document.createElement("li");
-                e.innerHTML = "<b>This product contains milk, and should not be consumed by people who are lactose intolerant.</b>";
+                e.innerHTML = "<br><ul><li>This food contains <b>lactose</b>, a natural sugar <b>found in milk and dairy products</b>, which may cause adverse reactions in individuals who are lactose intolerant. Consumption of this food can lead to discomfort and digestive issues for those affected.</li><li>Individuals who are lactose intolerant should seek lactose-free options or dairy substitutes such as almond milk, soy milk, coconut yogurt, or other plant-based products. Always check ingredient labels for hidden sources of lactose and consult with a healthcare provider for personalized dietary recommendations.</li></ul>";
                 resultList.append(e);
             } else {
                 let e = document.createElement("li");
-                e.innerHTML = `<b>Default others: ${othArray[prop].substring(4)}</b>`;
+                e.innerHTML = `<br><b>Default others: ${othArray[prop].substring(4)}</b>`;
                 resultList.append(e);
             }
         }

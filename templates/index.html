@@ -31,12 +31,32 @@
                     <table>
                         <tr>
                             <td>
+                                <a id="show-help" href="#popup1" title="Click/tap for help."><b>?</b></a>
+                                <br><br>
+                                
                                 <div class="img-area" data-img="">
                                     <i class="bx bxs-cloud-upload icon"></i>
                                     <h3>Upload Image</h3>
                                     <p>Upload an image with the food of your choice.</p>
                                 </div>
                                 <input class="select-image" title="Click this button to upload an image file." type="file" id="file" name="file" accept=".png, .jpg, .jpeg"><br>
+                                <div id="popup1" class="overlay">
+                                    <div class="popup">
+                                        <h2>Help</h2>
+                                        <a class="close" href="#">×</a>
+                                        <div class="content">
+                                            <br>
+                                            <ul>
+                                                <li>Click/tap on the first button you see under the white box to upload an image of your meal to be analyzed.</li><br>
+                                                <li>You can alter on what results to display by tinkering with the checkboxes below and entering your age. You can also use some of the presets provided, or leave everything at default.</li><br>
+                                                <li>Click/tap the "Analyze!" button at the bottom of the page to see the results.</li><br>
+                                                <li>The results will be shown on a separate page. It will show the predictions, ingredients and instructions on how to make that food, nutrition facts, and restrictions (if any).</li><br>
+                                                <li>Sometimes, the predictions may differ (significantly) from the expected output. To fix this, you can try to upload another image and see if the results check out.</li><br>
+                                                <li>For more inquiries, contact us on the email addresses provided at the bottom of the site.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -60,8 +80,8 @@
                                             <label for="preset-vegan">Vegan/vegetarian</label><br>
                                             <input type="radio" id="preset-pescatarian" name="preset" value="1">
                                             <label for="preset-pescatarian">Pescatarian</label><br>
-                                            <input type="radio" id="preset-all" name="preset" value="1">
-                                            <label for="preset-all">all (debug)</label><br>
+                                            <!-- <input type="radio" id="preset-all" name="preset" value="1">
+                                            <label for="preset-all">all (debug)</label><br> -->
                                             <!-- <input type="radio" id="preset-halal" name="preset" value="1">
                                             <label for="preset-halal">abstains from pork</label><br> -->
                                         </td>

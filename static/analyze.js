@@ -44,6 +44,42 @@ let ex5JSONString = document.getElementById("ex5");
 let dietaryRestrictions = document.getElementById("dietary-restrictions");
 let yourRestrictions = document.getElementById("your-restrictions");
 
+function toggleDarkModeResults() {
+    const body = document.body;
+
+    try {
+        let containerResults = document.getElementsByClassName("container-results")[0];
+        let predictions = document.getElementsByClassName("predictions")[0];
+        let nfTable = document.getElementsByClassName("nf")[0];
+        let nfBars = document.getElementsByClassName("nf-bar");
+
+        containerResults.classList.toggle("dark-mode");
+        predictions.classList.toggle("dark-mode");
+        nfTable.classList.toggle("dark-mode");
+        for (let i = 0; i < nfBars.length; i++) { nfBars[i].classList.toggle("dark-mode"); }
+    } catch (error) {
+        console.error("NOT OK");
+    }
+    
+    body.classList.toggle("dark-mode");
+    const darkModeToggle = document.querySelector(".dark-mode-toggle");
+    const toggleIcon = darkModeToggle.querySelector(".toggle-icon");
+    const modeText = darkModeToggle.querySelector(".mode-text");
+    const isDarkMode = body.classList.contains("dark-mode");
+
+    if (sessionStorage.getItem("mode") == "dark-mode") {
+        toggleIcon.innerHTML = "🌙";
+        modeText.innerHTML = "<b>Dark　</b>";
+        sessionStorage.setItem("mode", "light-mode");
+    } else {
+        toggleIcon.innerHTML = "🔆";
+        modeText.innerHTML = "<b>Light　</b>";
+        sessionStorage.setItem("mode", "light-mode");
+        body.classList.toggle(sessionStorage.getItem("mode"));
+        sessionStorage.setItem("mode", "dark-mode");
+    }
+}
+
 function showHideOtherPredictions() {
     var otherPredictions = document.getElementById("other-predictions");
     var showHideOtherPredictionsAnchor = document.getElementById("show-hide-other-predictions");
@@ -105,7 +141,6 @@ function viewRestrictions(pred, res) {
     let yourAge = "";
 
     if (res["user-age"]) {
-        // REWRITE THE INGREDIENTS AND STEPS AS AN ORDERED LIST
         yourAge = yourAge + `<b>Your age</b>: <span style='color: #3cbd44;'><b>${res["user-age"]}</b></span>`;
     } else {
         yourAge = yourAge + `<b>Your age</b>: <span style='color: red;'><b>none provided</b></span>`;
@@ -145,7 +180,7 @@ function viewRestrictions(pred, res) {
         othersString = "none";
     }
 
-    yourRestrictions.innerHTML = `${yourAge}<br><b>Your restrictions</b>: <span style='color: #3cbd44;'><b>${restrictionsString}</b></span><br><b>Your allergies</b>: <span style='color: #3cbd44;'><b>${allergiesString}</b></span><br>Others: <span style='color: #3cbd44;'><b>${othersString}</b></span><br><br>`
+    yourRestrictions.innerHTML = `${yourAge}<br><b>Your restrictions</b>: <span style='color: #3cbd44;'><b>${restrictionsString}</b></span><br><b>Your allergies</b>: <span style='color: #3cbd44;'><b>${allergiesString}</b></span><br><b>Others</b>: <span style='color: #3cbd44;'><b>${othersString}</b></span><br><br>`
 
     let resArray = [
         "res-beef",
@@ -255,7 +290,7 @@ function viewRestrictions(pred, res) {
         dietaryRestrictions.appendChild(resultList);
     } else {
         noResultsSpan = document.createElement("span");
-        noResultsSpan.innerHTML = "<b>There are no options provided by the user.</b><br>";
+        noResultsSpan.innerHTML = "";
         dietaryRestrictions.appendChild(noResultsSpan);
     }
 }

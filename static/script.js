@@ -56,7 +56,14 @@ try {
         inputFile.reset();
     });
 
-    function toggleDarkMode(){
+    function toggleDarkModeHome() {
+        try {
+            let popup = document.getElementsByClassName("popup")[0];
+            popup.classList.toggle("dark-mode");
+        } catch (error) {
+            console.error("move to results page first");
+        }
+        
         body.classList.toggle("dark-mode");
         const darkModeToggle = document.querySelector(".dark-mode-toggle");
         const toggleIcon = darkModeToggle.querySelector(".toggle-icon");
@@ -65,11 +72,11 @@ try {
 
         if (sessionStorage.getItem("mode") == "dark-mode") {
             toggleIcon.innerHTML = "🌙";
-            modeText.innerHTML = "<strong>Dark Mode</strong>";
+            modeText.innerHTML = "<b>Dark　</b>";
             sessionStorage.setItem("mode", "light-mode");
         } else {
-            toggleIcon.innerHTML = "🌞";
-            modeText.innerHTML = "<strong>Light Mode</strong>";
+            toggleIcon.innerHTML = "🔆";
+            modeText.innerHTML = "<b>Light　</b>";
             sessionStorage.setItem("mode", "light-mode");
             body.classList.toggle(sessionStorage.getItem("mode"));
             sessionStorage.setItem("mode", "dark-mode");
@@ -84,12 +91,12 @@ try {
 
         if (isDiaryMode) {
             toggleIcon.innerHTML = "📖";
-            modeText.innerHTML = "<strong>Diary Page</strong>";
+            modeText.innerHTML = "<b>Diary　</b>";
             snapSection.style.display = "none";
             diarySection.style.display = "flex";
         } else {
             toggleIcon.innerHTML = "📱";
-            modeText.innerHTML = "<strong>Snap Page</strong>";
+            modeText.innerHTML = "<b>Snap　</b>";
             snapSection.style.display = "flex";
             diarySection.style.display = "none";
         }
@@ -216,6 +223,8 @@ try {
             resBeef.checked = true;
             resChicken.checked = true;
             resFish.checked = true;
+            aleEggs.checked = true;
+            aleMilk.checked = true;
             aleShellfish.checked = true;
         } if (presetNone.checked) {
             for (let checkbox of checkBoxArray) {

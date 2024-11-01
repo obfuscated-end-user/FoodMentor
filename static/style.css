@@ -72,6 +72,11 @@ h1 {
     max-width: 800px;
 }
 
+.container-results.dark-mode {
+    background-color: #505050;
+    color: whitesmoke;
+}
+
 .img-area {
     position: relative;
     width: 100%;
@@ -171,8 +176,8 @@ body.dark-mode .container {
 }
 
 .dark-mode-toggle {
-    position: fixed;
-    top: 15px;
+    position: absolute;
+    top: 90px;
     left: 20px;
     font-size: 20px;
     color: #fff;
@@ -186,6 +191,7 @@ body.dark-mode .container {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 300;
 }
 
 .dark-mode-toggle .toggle-icon {
@@ -200,6 +206,11 @@ body.dark-mode .container {
 .predictions {
     background: whitesmoke;
     text-align: left;
+}
+
+.predictions.dark-mode {
+    background-color: #505050;
+    color: whitesmoke;
 }
 
 #similar-foods, #ingredients-and-recipe, #dietary-restrictions {
@@ -231,8 +242,9 @@ input[type=file]::file-selector-button {
 }
 
 .page-mode-toggle {
-    position: fixed;
-    top: 15px;
+    /* position: fixed; */
+    position: absolute;
+    top: 90px;
     right: 20px;
     font-size: 20px;
     color: #fff;
@@ -246,6 +258,7 @@ input[type=file]::file-selector-button {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 300;
 }
 
 .toggle-icon {
@@ -254,7 +267,7 @@ input[type=file]::file-selector-button {
 }
 
 /*Diary Css */
-.diary-container{
+.diary-container {
     width: 1001px;
     background: #fff;
     padding: 30px;
@@ -434,11 +447,19 @@ th {
     margin-left: auto;
     margin-right: auto;
     padding: 2px;
-    width: 60%;
+    width: 85%;
 }
 
 .nf td {
     border-bottom: 1px solid black;
+}
+
+.nf.dark-mode {
+    border: 1px solid whitesmoke;
+}
+
+.nf.dark-mode td {
+    border-bottom: 1px solid whitesmoke;
 }
 
 .nf-header {
@@ -458,6 +479,11 @@ th {
     color: black;
 }
 
+.nf-bar.dark-mode {
+    background-color: whitesmoke;
+    color: whitesmoke;
+}
+
 .nf-footer {
     font-size: small;
 }
@@ -471,7 +497,7 @@ li h2, li h3 {
 }
 
 ol > li::marker, ul > li::marker {
-    color: #237028;
+    color: #3cbd44;
     font-weight: bold;
 }
 
@@ -495,6 +521,7 @@ ol > li::marker, ul > li::marker {
     top: 0;
     transition: opacity 500ms;
     visibility: hidden;
+    z-index: 400;
 }
 
 .overlay:target {
@@ -503,7 +530,7 @@ ol > li::marker, ul > li::marker {
 }
 
 .popup {
-    background: #fff;
+    background: whitesmoke;
     border-radius: 5px;
     margin: 70px auto;
     padding: 20px;
@@ -512,9 +539,18 @@ ol > li::marker, ul > li::marker {
     z-index: 500;
 }
 
+.popup.dark-mode {
+    background-color: #505050;
+    color: whitesmoke;
+}
+
 .popup h2 {
     color: #333;
     margin-top: 0;
+}
+
+.popup.dark-mode h2 {
+    color: whitesmoke;
 }
 
 .popup .close {
@@ -525,6 +561,10 @@ ol > li::marker, ul > li::marker {
     right: 30px;
     text-decoration: none;
     top: 20px;
+}
+
+.popup.dark-mode .close {
+    color: whitesmoke;
 }
 
 .popup .close:hover, #show-help:hover {
@@ -543,4 +583,24 @@ ol > li::marker, ul > li::marker {
     .popup {
         width: 70%;
     }
+}
+    
+@media (max-width: 623px) {
+    html {
+    font-size: 12px;
+    }
+}
+
+h1, h2, h3, label, th, .img-area p, #contact-name, #contact-email {
+    user-select: none;
+}
+
+a, a:visited {
+    font-weight: bold;
+    color: #3cbd44;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    cursor: pointer;
+    accent-color: #3cbd44;    
 }

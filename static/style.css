@@ -604,3 +604,32 @@ input[type="checkbox"], input[type="radio"] {
     cursor: pointer;
     accent-color: #3cbd44;    
 }
+
+input[type="checkbox"] {
+    -webkit-appearance: initial;
+    appearance: initial;
+    background: #fff;
+    width: 12px;
+    height: 12px;
+    border: 2px solid gray;
+    border-radius: 25%;
+    position: relative;
+}
+
+input[type="checkbox"]:checked {
+    background: #3cbd44;
+    border: 2px solid #3cbd44;
+}
+
+input[type="checkbox"]:checked:after {
+    content: "×";
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}

@@ -232,14 +232,6 @@ function viewRestrictions(pred, res) {
         console.log("NONE");
     }
 
-    /*
-    MAKE A PROPERTY THAT CONTAINS ALL OPTIONS FOR DEBUGGING PURPOSES
-    DEBUG
-    "ice_cream":["res-sugar", "ale-milk", "ale-eggs", "ale-wheat"],
-    ORIGINAL
-    "ice_cream":["res-sugar", "ale-milk"],
-    */
-
     // ale
     let allergenUl = document.createElement("ul");
     allergenUl.style = "list-style-type: none;";
@@ -330,6 +322,9 @@ function viewEx(exnumViewEx, res) {
     dietaryRestrictions.appendChild(exDiv);
 }
 
+function detailsButtonToggle(num) {
+}
+
 function viewDetails(prediction, recipe, simres, exnum) {
     // you can use `prediction` as key for the JSON
 
@@ -346,13 +341,19 @@ function viewDetails(prediction, recipe, simres, exnum) {
         return `<h3>${pos}. ${simres["food"][y]}</h3>similarity: ${csfp(y, simres)}%`;
     }
 
+    detailsButtons = document.getElementsByClassName("details-button");
+
+    for (let i = 0; i < detailsButtons.length; i++)
+        detailsButtons[i].style.visibility = "visible";
+    detailsButtons[exnum - 1].style.visibility = "hidden";
+
     // name of the food
     // replaceAll() is needed to actually render it as HTML
     ingredientsAndRecipe.innerHTML = recipe.innerHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
     // header for the list of ingredients and recipe
     ingredientsAndRecipeHeader.innerHTML = `Ingredients and recipe for: ${prediction.innerHTML}</b>`;
 
-    // similar food (nlp)
+    // similar food
     similarFoodsHeader.innerHTML = `Foods similar to ${prediction.innerHTML} (based on the similarity of the recipes):`;
 
     s = JSON.parse(simres.innerHTML);
@@ -366,6 +367,11 @@ function viewDetails(prediction, recipe, simres, exnum) {
     similar3.innerHTML = fsfp(3, s);
     similar4.innerHTML = fsfp(4, s);
     similar5.innerHTML = fsfp(5, s);
+
+    detailsButtons = document.getElementsByClassName("details-button");
+    for (let i = 0; i < detailsButtons.length; i++)
+        detailsButtons[i].style.visibility = "visible";
+    detailsButtons[exnum - 1].style.visibility = "hidden";
 }
 
 function z(kl) {

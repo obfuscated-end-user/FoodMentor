@@ -89,7 +89,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Notify if food contains:</th>
+                                        <th>Notify if food<br>contains:</th>
                                         <th>Allergic to:</th>
                                         <th>Other:</th>
                                     </tr>
@@ -98,38 +98,44 @@
                                             <!-- CHECKBOXES -->
                                             <!-- check for the value attr because that's what gets sent in the form -->
                                             <!-- res - restriction -->
-                                            <input type="checkbox" id="res-beef" name="res-beef" value="1">
-                                            <label for="res-beef">Beef</label><br>
-                                            <input type="checkbox" id="res-chicken" name="res-chicken" value="1">
-                                            <label for="res-chicken">Chicken</label><br>
-                                            <input type="checkbox" id="res-fish" name="res-fish" value="1">
-                                            <label for="res-fish">Fish</label><br>
-                                            <input type="checkbox" id="res-pork" name="res-pork" value="1">
-                                            <label for="res-pork">Pork</label><br>
-                                            <input type="checkbox" id="res-sugar" name="res-sugar" value="1">
-                                            <label for="res-sugar">Sugar</label><br>
+                                            <input type="checkbox" id="res-beef" name="res-beef" value="1" onclick="uncheckNone(1)">
+                                            <label for="res-beef" onclick="uncheckNone(1)">Beef</label><br>
+                                            <input type="checkbox" id="res-chicken" name="res-chicken" value="1" onclick="uncheckNone(1)">
+                                            <label for="res-chicken" onclick="uncheckNone(1)">Chicken</label><br>
+                                            <input type="checkbox" id="res-fish" name="res-fish" value="1" onclick="uncheckNone(1)">
+                                            <label for="res-fish" onclick="uncheckNone(1)">Fish</label><br>
+                                            <input type="checkbox" id="res-pork" name="res-pork" value="1" onclick="uncheckNone(1)">
+                                            <label for="res-pork" onclick="uncheckNone(1)">Pork</label><br>
+                                            <input type="checkbox" id="res-sugar" name="res-sugar" value="1" onclick="uncheckNone(1)">
+                                            <label for="res-sugar" onclick="uncheckNone(1)">Sugar</label><br>
+                                            <input type="radio" id="res-none" name="res-none" value="1"  onclick="uncheckOtherCheckboxes(1)" checked>
+                                            <label for="res-none" onclick="uncheckOtherCheckboxes(1)">(none)</label><br>
                                         </td>
                                         <td>
                                             <!-- ale - allergy -->
-                                            <input type="checkbox" id="ale-eggs" name="ale-eggs" value="1">
-                                            <label for="ale-eggs">Eggs</label><br>
-                                            <input type="checkbox" id="ale-milk" name="ale-milk" value="1">
-                                            <label for="ale-milk">Milk</label><br>
-                                            <input type="checkbox" id="ale-nuts" name="ale-nuts" value="1">
-                                            <label for="ale-nuts">Nuts</label><br>
-                                            <input type="checkbox" id="ale-shellfish" name="ale-shellfish" value="1">
-                                            <label for="ale-shellfish">Shellfish</label><br>
-                                            <input type="checkbox" id="ale-soy" name="ale-soy" value="1">
-                                            <label for="ale-soy">Soy</label><br>
-                                            <input type="checkbox" id="ale-wheat" name="ale-wheat" value="1">
-                                            <label for="ale-wheat">Wheat</label><br>
+                                            <input type="checkbox" id="ale-eggs" name="ale-eggs" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-eggs" onclick="uncheckNone(2)">Eggs</label><br>
+                                            <input type="checkbox" id="ale-milk" name="ale-milk" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-milk" onclick="uncheckNone(2)">Milk</label><br>
+                                            <input type="checkbox" id="ale-nuts" name="ale-nuts" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-nuts" onclick="uncheckNone(2)">Nuts</label><br>
+                                            <input type="checkbox" id="ale-shellfish" name="ale-shellfish" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-shellfish" onclick="uncheckNone(2)">Shellfish</label><br>
+                                            <input type="checkbox" id="ale-soy" name="ale-soy" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-soy" onclick="uncheckNone(2)">Soy</label><br>
+                                            <input type="checkbox" id="ale-wheat" name="ale-wheat" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-wheat" onclick="uncheckNone(2)">Wheat</label><br>
+                                            <input type="radio" id="ale-none" name="ale-none" value="1" onclick="uncheckOtherCheckboxes(2)" checked>
+                                            <label for="ale-none" onclick="uncheckOtherCheckboxes(2)">(none)</label><br>
                                         </td>
                                         <td>
                                             <!-- oth - others -->
-                                            <input type="checkbox" id="oth-diabetic" name="oth-diabetic" value="1">
-                                            <label for="oth-diabetic">Diabetic</label><br>
-                                            <input type="checkbox" id="oth-lactose" name="oth-lactose" value="1">
-                                            <label for="oth-lactose">Lactose intolerant</label><br>
+                                            <input type="checkbox" id="oth-diabetic" name="oth-diabetic" value="1" onclick="uncheckNone(3)">
+                                            <label for="oth-diabetic" onclick="uncheckNone(3)">Diabetic</label><br>
+                                            <input type="checkbox" id="oth-lactose" name="oth-lactose" value="1" onclick="uncheckNone(3)">
+                                            <label for="oth-lactose" onclick="uncheckNone(3)">Lactose intolerant</label><br>
+                                            <input type="radio" id="oth-none" name="oth-none" value="1" onclick="uncheckOtherCheckboxes(3)" checked>
+                                            <label for="oth-none" onclick="uncheckOtherCheckboxes(3)">(none)</label><br>
                                         </td>
                                     </tr>
                                 </table>

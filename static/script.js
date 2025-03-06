@@ -1,6 +1,4 @@
 try {
-    console.log("If the page doesn't work as intended, it may be your browser acting up.");
-
     // checkboxes and radio buttons
     let presetNone = document.getElementById("preset-none")
     let presetVegan = document.getElementById("preset-vegan");
@@ -12,6 +10,7 @@ try {
     let resChicken = document.getElementById("res-chicken");
     let resFish = document.getElementById("res-fish");
     let resSugar = document.getElementById("res-sugar");
+    let resNone = document.getElementById("res-none");
 
     let aleEggs = document.getElementById("ale-eggs");
     let aleMilk = document.getElementById("ale-milk");
@@ -19,9 +18,11 @@ try {
     let aleShellfish = document.getElementById("ale-shellfish");
     let aleSoy = document.getElementById("ale-soy");
     let aleWheat = document.getElementById("ale-wheat");
+    let aleNone = document.getElementById("ale-none");
 
     let othDiabetic = document.getElementById("oth-diabetic");
     let othLactose = document.getElementById("oth-lactose");
+    let othNone = document.getElementById("oth-none");
 
     let checkBoxArray = [
         resBeef,
@@ -80,6 +81,38 @@ try {
             sessionStorage.setItem("mode", "light-mode");
             body.classList.toggle(sessionStorage.getItem("mode"));
             sessionStorage.setItem("mode", "dark-mode");
+        }
+    }
+
+    function uncheckNone(col) {
+        switch (col) {
+            case 1: resNone.checked = false; break;
+            case 2: aleNone.checked = false; break;
+            case 3: othNone.checked = false; break;
+            default: console.log("none specified");
+        }
+    }
+
+    function uncheckOtherCheckboxes(col) {
+        if (col == 1) {
+            resPork.checked = false;
+            resBeef.checked = false;
+            resChicken.checked = false;
+            resFish.checked = false;
+            resSugar.checked = false;
+            resNone.checked = true;
+        } else if (col == 2) {
+            aleEggs.checked = false;
+            aleMilk.checked = false;
+            aleNuts.checked = false;
+            aleShellfish.checked = false;
+            aleSoy.checked = false;
+            aleWheat.checked = false;
+            aleNone.checked = true;
+        } else if (col == 3) {
+            othDiabetic.checked = false;
+            othLactose.checked = false;
+            othNone.checked = true;
         }
     }
 
@@ -210,15 +243,16 @@ try {
 
     function setPreset() {
         if (presetPescatarian.checked) {
-            for (let checkbox of checkBoxArray) {
+            for (let checkbox of checkBoxArray)
                 checkbox.checked = false;
-            }
             resFish.checked = true;
             aleShellfish.checked = true;
+            resNone.checked = false;
+            aleNone.checked = false;
+            othNone.checked = false;
         } if (presetVegan.checked) {
-            for (let checkbox of checkBoxArray) {
+            for (let checkbox of checkBoxArray)
                 checkbox.checked = false;
-            }
             resPork.checked = true;
             resBeef.checked = true;
             resChicken.checked = true;
@@ -226,16 +260,21 @@ try {
             aleEggs.checked = true;
             aleMilk.checked = true;
             aleShellfish.checked = true;
+            resNone.checked = false;
+            aleNone.checked = false;
+            othNone.checked = false;
         } if (presetNone.checked) {
-            for (let checkbox of checkBoxArray) {
+            for (let checkbox of checkBoxArray)
                 checkbox.checked = false;
-            }
-        } if (presetAll.checked) {
+            resNone.checked = true;
+            aleNone.checked = true;
+            othNone.checked = true;
+        }/*  if (presetAll.checked) {
             // debug
             for (let checkbox of checkBoxArray) {
                 checkbox.checked = true;
             }
-        }
+        } */
     }
 
     function z(kl) {

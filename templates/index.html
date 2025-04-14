@@ -8,6 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Aclonica&display=swap" rel="stylesheet">
         <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}" async></script>
         <title>FoodMentor: Home</title>
     </head>
@@ -38,7 +39,7 @@
                                     <h3>Upload Image</h3>
                                     <p>Upload an image with the food of your choice.</p>
                                 </div>
-                                <input class="select-image" title="Click this button to upload an image file." type="file" id="file" name="file" accept=".png, .jpg, .jpeg"><br>
+                                <input class="select-image" title="Click this button to upload an image file." type="file" id="file" name="file" accept=".png, .jpg, .jpeg" onclick="fileClicked(event)" onchange="fileChanged(event)"><br>
                                 <div id="popup1" class="overlay">
                                     <div class="popup">
                                         <h2>Help</h2>
@@ -79,10 +80,8 @@
                                             <label for="preset-vegan">Vegan/vegetarian</label><br>
                                             <input type="radio" id="preset-pescatarian" name="preset" value="1">
                                             <label for="preset-pescatarian">Pescatarian</label><br>
-                                            <!-- <input type="radio" id="preset-all" name="preset" value="1">
-                                            <label for="preset-all">all (debug)</label><br> -->
-                                            <!-- <input type="radio" id="preset-halal" name="preset" value="1">
-                                            <label for="preset-halal">abstains from pork</label><br> -->
+                                            <input type="radio" id="preset-meat-lover" name="preset" value="1">
+                                            <label for="preset-meat-lover">Meat lover</label>
                                         </td>
                                         <td>
                                             <button id="set-presets-btn" class="select-image" type="button" onclick="setPreset()">Set</button>
@@ -117,14 +116,22 @@
                                             <label for="ale-eggs" onclick="uncheckNone(2)">Eggs</label><br>
                                             <input type="checkbox" id="ale-milk" name="ale-milk" value="1" onclick="uncheckNone(2)">
                                             <label for="ale-milk" onclick="uncheckNone(2)">Milk</label><br>
-                                            <input type="checkbox" id="ale-nuts" name="ale-nuts" value="1" onclick="uncheckNone(2)">
-                                            <label for="ale-nuts" onclick="uncheckNone(2)">Nuts</label><br>
-                                            <input type="checkbox" id="ale-shellfish" name="ale-shellfish" value="1" onclick="uncheckNone(2)">
-                                            <label for="ale-shellfish" onclick="uncheckNone(2)">Shellfish</label><br>
-                                            <input type="checkbox" id="ale-soy" name="ale-soy" value="1" onclick="uncheckNone(2)">
-                                            <label for="ale-soy" onclick="uncheckNone(2)">Soy</label><br>
-                                            <input type="checkbox" id="ale-wheat" name="ale-wheat" value="1" onclick="uncheckNone(2)">
-                                            <label for="ale-wheat" onclick="uncheckNone(2)">Wheat</label><br>
+                                            <input type="checkbox" id="ale-peanuts" name="ale-peanuts" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-peanuts" onclick="uncheckNone(2)">Peanuts</label><br>
+                                            <input type="checkbox" id="ale-tree-nuts" name="ale-tree-nuts" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-tree-nuts" onclick="uncheckNone(2)" title="almonds, walnuts, pecans" class="broken-underline">Tree nuts</label><br>
+                                            <input type="checkbox" id="ale-soybeans" name="ale-soybeans" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-soybeans" onclick="uncheckNone(2)">Soybeans</label><br>
+                                            <input type="checkbox" id="ale-gluten" name="ale-gluten" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-gluten" onclick="uncheckNone(2)" title="wheat, bread, grains" class="broken-underline">Gluten</label><br>
+                                            <input type="checkbox" id="ale-sesame" name="ale-sesame" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-sesame" onclick="uncheckNone(2)">Sesame</label><br>
+                                            <input type="checkbox" id="ale-fish" name="ale-fish" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-fish" onclick="uncheckNone(2)" title="bass, flounder, cod" class="broken-underline">Fish</label><br>
+                                            <input type="checkbox" id="ale-crustacean-shellfish" name="ale-crustacean-shellfish" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-crustacean-shellfish" onclick="uncheckNone(2)" title="crab, lobster, shrimp" class="broken-underline">Crustacean shellfish</label><br>
+                                            <input type="checkbox" id="ale-mollusks" name="ale-mollusks" value="1" onclick="uncheckNone(2)">
+                                            <label for="ale-mollusks" onclick="uncheckNone(2)" title="squid, oysters, scallops" class="broken-underline">Mollusks</label><br>
                                             <input type="radio" id="ale-none" name="ale-none" value="1" onclick="uncheckOtherCheckboxes(2)" checked>
                                             <label for="ale-none" onclick="uncheckOtherCheckboxes(2)">(none)</label><br>
                                         </td>

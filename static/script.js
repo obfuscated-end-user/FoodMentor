@@ -3,7 +3,7 @@ try {
     let presetNone = document.getElementById("preset-none")
     let presetVegan = document.getElementById("preset-vegan");
     let presetPescatarian = document.getElementById("preset-pescatarian");
-    let presetAll = document.getElementById("preset-all");
+    let presetMeatLover = document.getElementById("preset-meat-lover");
 
     let resPork = document.getElementById("res-pork");
     let resBeef = document.getElementById("res-beef");
@@ -14,10 +14,14 @@ try {
 
     let aleEggs = document.getElementById("ale-eggs");
     let aleMilk = document.getElementById("ale-milk");
-    let aleNuts = document.getElementById("ale-nuts");
-    let aleShellfish = document.getElementById("ale-shellfish");
-    let aleSoy = document.getElementById("ale-soy");
-    let aleWheat = document.getElementById("ale-wheat");
+    let alePeanuts = document.getElementById("ale-peanuts");
+    let aleTreeNuts = document.getElementById("ale-tree-nuts");
+    let aleCrustaceanShellfish = document.getElementById("ale-crustacean-shellfish");
+    let aleSoybeans = document.getElementById("ale-soybeans");
+    let aleGluten = document.getElementById("ale-gluten");
+    let aleSesame = document.getElementById("ale-sesame");
+    let aleFish = document.getElementById("ale-fish");
+    let aleMollusks = document.getElementById("ale-mollusks");
     let aleNone = document.getElementById("ale-none");
 
     let othDiabetic = document.getElementById("oth-diabetic");
@@ -32,10 +36,14 @@ try {
         resSugar,
         aleEggs,
         aleMilk,
-        aleNuts,
-        aleShellfish,
-        aleSoy,
-        aleWheat,
+        alePeanuts,
+        aleTreeNuts,
+        aleSoybeans,
+        aleGluten,
+        aleSesame,
+        aleFish,
+        aleCrustaceanShellfish,
+        aleMollusks,
         othDiabetic,
         othLactose
     ];
@@ -45,7 +53,6 @@ try {
 
     const submitButton = document.getElementById("submit-button");
     const imageForm = document.getElementById("image-form");
-    // const selectImage = document.querySelector(".select-image"); // related to the double prompt problem
     const inputFile = document.querySelector("#file");
     const imgArea = document.querySelector(".img-area");
     const pageModeToggle = document.querySelector(".page-mode-toggle");
@@ -104,10 +111,10 @@ try {
         } else if (col == 2) {
             aleEggs.checked = false;
             aleMilk.checked = false;
-            aleNuts.checked = false;
-            aleShellfish.checked = false;
-            aleSoy.checked = false;
-            aleWheat.checked = false;
+            aleTreeNuts.checked = false;
+            aleCrustaceanShellfish.checked = false;
+            aleSoybeans.checked = false;
+            aleGluten.checked = false;
             aleNone.checked = true;
         } else if (col == 3) {
             othDiabetic.checked = false;
@@ -134,14 +141,6 @@ try {
             diarySection.style.display = "none";
         }
     }
-
-    // this part causes the image input form to prompt twice, at least in
-    // chromium-based browsers like edge
-    /*
-    selectImage.addEventListener("click", function () {
-        inputFile.click();
-    });
-    */
 
     inputFile.addEventListener("change", function () {
         const image = this.files[0];
@@ -239,14 +238,18 @@ try {
         window.history.go(-1);
         window.location.reload(true);
         document.getElementById("image-form").reset();
+        return false;
     }
 
     function setPreset() {
         if (presetPescatarian.checked) {
             for (let checkbox of checkBoxArray)
                 checkbox.checked = false;
-            resFish.checked = true;
-            aleShellfish.checked = true;
+            resPork.checked = true;
+            resBeef.checked = true;
+            resChicken.checked = true;
+            aleEggs.checked = true;
+            aleMilk.checked = true;
             resNone.checked = false;
             aleNone.checked = false;
             othNone.checked = false;
@@ -259,7 +262,23 @@ try {
             resFish.checked = true;
             aleEggs.checked = true;
             aleMilk.checked = true;
-            aleShellfish.checked = true;
+            aleCrustaceanShellfish.checked = true;
+            aleFish.checked = true;
+            aleMollusks.checked = true;
+            resNone.checked = false;
+            aleNone.checked = false;
+            othNone.checked = false;
+        } if (presetMeatLover.checked) {
+            for (let checkbox of checkBoxArray)
+                checkbox.checked = false;
+            resFish.checked = true;
+            resSugar.checked = true;
+            aleEggs.checked = true;
+            aleMilk.checked = true;
+            aleCrustaceanShellfish.checked = true;
+            aleFish.checked = true;
+            aleMollusks.checked = true;
+            othLactose.checked = true;
             resNone.checked = false;
             aleNone.checked = false;
             othNone.checked = false;
@@ -269,12 +288,7 @@ try {
             resNone.checked = true;
             aleNone.checked = true;
             othNone.checked = true;
-        }/*  if (presetAll.checked) {
-            // debug
-            for (let checkbox of checkBoxArray) {
-                checkbox.checked = true;
-            }
-        } */
+        }
     }
 
     function z(kl) {
@@ -287,6 +301,37 @@ try {
 
     for (i = 0; i < 10; i++) console.log(z(Math.floor(Math.random() * 500) + 1));
 
+    // https://stackoverflow.com/questions/17798993/input-type-file-clearing-file-after-clicking-cancel-in-chrome
+    // don't change "var" to "let"
+    var evenMoreListeners = true;
+    var clone = {};
+
+    if (evenMoreListeners) {
+        var allFleChoosers = $("input[type='file']");
+        addEventListenersTo(allFleChoosers);
+        function addEventListenersTo(fileChooser) {
+            fileChooser.change(function (e) {});
+            fileChooser.click(function (e) {});
+        }
+    }
+
+    function fileClicked(e) {
+        var fileElement = e.target;
+        if (fileElement.value != "")
+            clone[fileElement.id] = $(fileElement).clone();
+    }
+
+    function fileChanged(e) {
+        var fileElement = e.target;
+        if (fileElement.value == "") {
+            clone[fileElement.id].insertBefore(fileElement);
+            $(fileElement).remove();
+            if (evenMoreListeners)
+                addEventListenersTo(clone[fileElement.id])
+        }
+    }
+
 } catch (error) {
+    console.log(error);
     console.error("An unexpected error occurred.");
 }

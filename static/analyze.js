@@ -15,6 +15,7 @@ let recipe5 = document.getElementById("recipe-5");
 
 let ingredientsAndRecipeHeader = document.getElementById("ingredients-and-recipe-header");
 let ingredientsAndRecipe = document.getElementById("ingredients-and-recipe");
+let allergenAndContains = document.getElementById("allergen-and-contains");
 
 // similar result
 let simres1 = document.getElementById("simres-1");
@@ -23,6 +24,7 @@ let simres3 = document.getElementById("simres-3");
 let simres4 = document.getElementById("simres-4");
 let simres5 = document.getElementById("simres-5");
 
+// deprecated
 let similarFoodsHeader = document.getElementById("similar-foods-header");
 let similarFoods = document.getElementById("similar-foods");
 
@@ -41,6 +43,9 @@ let ex3JSONString = document.getElementById("ex3");
 let ex4JSONString = document.getElementById("ex4");
 let ex5JSONString = document.getElementById("ex5");
 
+let allergenSubstitutes = document.getElementById("allergen-substitutes");
+let allergenSubstitutesVisibility = document.getElementById("allergen-substitutes-visibility");
+let dietaryRestrictionsHeader = document.getElementById("dietary-restrictions-header");
 let dietaryRestrictions = document.getElementById("dietary-restrictions");
 let yourRestrictions = document.getElementById("your-restrictions");
 
@@ -91,8 +96,10 @@ function showHideOtherPredictions() {
         showHideOtherPredictionsAnchor.innerHTML = "(show)";
     }
 }
+// automatically hide this section on page load
 showHideOtherPredictions();
 
+// deprecated holdout but don't remove
 function showHideSimilarFoods() {
     var similarFoods = document.getElementById("similar-foods");
     var showHideSimilarFoodsAnchor = document.getElementById("show-hide-similar-foods");
@@ -118,7 +125,18 @@ function showHideDietaryRestrictions() {
         showHidedietaryRestrictions.innerHTML = "(show)";
     }
 }
-showHideDietaryRestrictions();
+
+function showHideAllergenSubstitutes() {
+    var showHideAllergenSubstitutes = document.getElementById("show-hide-allergen-substitutes");
+    if (allergenSubstitutes.style.display == "none") {
+        allergenSubstitutes.style.display = "block";
+        showHideAllergenSubstitutes.innerHTML = "(hide)";
+    } else {
+        allergenSubstitutes.style.display = "none";
+        showHideAllergenSubstitutes.innerHTML = "(show)";
+    }
+}
+showHideAllergenSubstitutes();
 
 function containsProperty(prop, pred) {
     return (res.hasOwnProperty(prop) && resJSON[pred.innerHTML.replaceAll(" ", "_")].includes(prop));
@@ -140,27 +158,31 @@ function viewRestrictions(pred, res) {
 
     let yourAge = "";
 
-    if (res["user-age"]) {
+    if (res["user-age"])
         yourAge = yourAge + `<b>Your age</b>: <span style='color: #3cbd44;'><b>${res["user-age"]}</b></span>`;
-    } else {
+    else
         yourAge = yourAge + `<b>Your age</b>: <span style='color: red;'><b>none provided</b></span>`;
-    }
 
     let allergiesString = "";
     let restrictionsString = "";
     let othersString = "";
 
     for (key in resKeys) {
-        if (resKeys[key].startsWith("res-")) {
+        if (resKeys[key].startsWith("res-"))
             restrictionsString = restrictionsString + resKeys[key].substring(4) + ", ";
-        } if (resKeys[key].startsWith("ale-")) {
-            allergiesString = allergiesString + resKeys[key].substring(4) + ", ";
-        } if (resKeys[key].startsWith("oth-")) {
-            if (resKeys[key] == "oth-lactose") {
+        if (resKeys[key].startsWith("ale-")) {
+            if (resKeys[key].includes("n-s"))
+                allergiesString = allergiesString + resKeys[key].substring(4).replace("n-s", "n s") + ", ";
+            else if (resKeys[key].includes("e-n"))
+                allergiesString = allergiesString + resKeys[key].substring(4).replace("e-n", "e n") + ", ";
+            else
+                allergiesString = allergiesString + resKeys[key].substring(4) + ", ";
+        }
+        if (resKeys[key].startsWith("oth-")) {
+            if (resKeys[key] == "oth-lactose")
                 othersString = othersString + "lactose intolerant, ";
-            } else {
+            else
                 othersString = othersString + resKeys[key].substring(4) + ", ";
-            }
         }
     }
 
@@ -172,13 +194,12 @@ function viewRestrictions(pred, res) {
         console.log(error);
     }
 
-    if (restrictionsString === "") {
+    if (restrictionsString === "")
         restrictionsString = "none";
-    } if (allergiesString === "") {
+    if (allergiesString === "")
         allergiesString = "none";
-    } if (othersString === "") {
+    if (othersString === "")
         othersString = "none";
-    }
 
     yourRestrictions.innerHTML = `${yourAge}<br><b>Your restrictions</b>: <span style='color: #3cbd44;'><b>${restrictionsString}</b></span><br><b>Your allergies</b>: <span style='color: #3cbd44;'><b>${allergiesString}</b></span><br><b>Others</b>: <span style='color: #3cbd44;'><b>${othersString}</b></span><br><br>`
 
@@ -191,18 +212,68 @@ function viewRestrictions(pred, res) {
     ];
 
     let aleArray = [
+        "ale-crustacean-shellfish",
         "ale-eggs",
+        "ale-fish",
+        "ale-gluten",
         "ale-milk",
-        "ale-nuts",
-        "ale-shellfish",
-        "ale-soy",
-        "ale-wheat"
+        "ale-mollusks",
+        "ale-peanuts",
+        "ale-sesame",
+        "ale-soybeans",
+        "ale-tree-nuts",
     ];
 
     let othArray = [
         "oth-diabetic",
         "oth-lactose"
     ];
+
+    let aleSubstitutesDict = {
+        "ale-eggs": "<h2 style='list-style-type:none'>Egg Substitutes</h2><ul><li>Applesauce</li><li>Mashed banana</li><li>Ground flaxseed</li><li>Yogurt (contains milk)</li><li>Silken tofu (contains soy)</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://www.pccmarkets.com/taste/2013-03/egg_substitutes' target='_blank' rel='noreferrer'>PCC Markets</a></li></ul><br>",
+        "ale-milk": "<h2 style='list-style-type:none'>Milk Substitutes</h2><ul><li>Coconut milk</li><li>Oat milk</li><li>Rice milk</li><li>Cashew milk</li><li>Quinoa milk</li><li>Soy milk (contains soy)</li><li>Almond milk (contains nuts)</li><li>Cashew milk (contains nuts)</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://www.healthline.com/nutrition/best-milk-substitutes#TOC_TITLE_HDR_11' target='_blank' rel='noreferrer'>Healthline</a></li><li><a href='https://www.nhs.uk/live-well/eat-well/food-types/milk-and-dairy-nutrition/#:~:text=soya%2C%20rice%2C%20oat%2C%20almond,alternatives%20to%20yoghurt%20and%20cheese' target='_blank' rel='noreferrer'>NHS UK</a></li></ul><br>",
+        "ale-peanuts": "<h2 style='list-style-type:none'>Peanut Substitutes</h2><ul><li>Seeds</li><li>Beans</li><li>Pretzels (may contain gluten)</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://kidswithfoodallergies.org/recipes-diet/recipe-substitutions/substitutions-for-peanuts-and-tree-nuts/#:~:text=Seeds%20%E2%80%93%20nut%2Dfree%20source,Updated%20December%202022.' target='_blank' rel='noreferrer'>Kids With Food Allergies</a></li><li><a href='https://www.allergyclinical.com/blog/safe-substitutes-for-nut-allergies/#:~:text=Sunflower%20or%20Pumpkins%20Seeds,for%20those%20with%20peanut%20allergies.' target='_blank' rel='noreferrer'>Allergy Clinical</a></li></ul><br>",
+        "ale-tree-nuts": "<h2 style='list-style-type:none'>Tree Nut Substitutes</h2><ul><li>Beans</li><li>Pretzels</li><li>Dried fruit</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://kidswithfoodallergies.org/recipes-diet/recipe-substitutions/substitutions-for-peanuts-and-tree-nuts/#:~:text=Seeds%20%E2%80%93%20nut%2Dfree%20source,Updated%20December%202022.' target='_blank' rel='noreferrer'>Kids With Food Allergies</a></li><li><a href='https://www.allergyclinical.com/blog/safe-substitutes-for-nut-allergies/#:~:text=Sunflower%20or%20Pumpkins%20Seeds,for%20those%20with%20peanut%20allergies.' target='_blank' rel='noreferrer'>Allergy Clinical</a></li></ul><br>",
+        "ale-soybeans": "<h2 style='list-style-type:none'>Soybeans/Soy Substitutes</h2><ul><li>Olive brine/balsamic vinegar/soy-free miso sauce FOR soy sauce</li><li>Canola oil/olive oil FOR soy oil</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://www.webmd.com/allergies/food-substitutes-soy-allergy' target='_blank' rel='noreferrer'>WebMD</a></li></ul><br>",
+        "ale-gluten": "<h2 style='list-style-type:none'>Gluten Substitutes</h2><ul><li>Amaranth</li><li>Arrowroot</li><li>Buckwheat</li><li>Corn</li><li>Flaxseed</li><li>Millet</li><li>Quinoa</li><li>Sorghum</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/gluten-free-diet/art-20048530' target='_blank' rel='noreferrer'>Mayo Clinic</a></li></ul><br>",
+        "ale-sesame": "<h2 style='list-style-type:none'>Sesame Substitutes</h2><ul><li>Other seeds such as flaxseed, pumpkin seeds, sunflower seeds, chia, poppy seeds/chia seeds</li><li>Olive oil, avocado oil, grapeseed oil, walnut oil (contains nuts), peanut oil (contains nuts) FOR sesame oil</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://www.webmd.com/allergies/sesame-allergy' target='_blank' rel='noreferrer'>WebMD</a></li><li><a href='https://www.healthline.com/nutrition/sesame-oil-substitute' target='_blank' rel='noreferrer'>Healthline</a></li></ul><br>",
+        "ale-fish": "<h2 style='list-style-type:none'>Fish Substitutes</h2><ul><li>Tofu/tempeh (might contain soy)</li><li>Jackruit</li><li>Hearts of palm/banana blossom</li><li>Grains (might contain gluten)</li><li>Beans</li><li>Lentils</li><li>Chickpeas</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://www.mylittlepiccolo.com/weaning-hub-post/fish-and-shellfish-allergy-awareness-what-parents-need-to-know-alternatives/#:~:text=If%20your%20child%20has%20a,plan%20that%20meets%20these%20needs.' target='_blank' rel='noreferrer'>My Little Piccolo</a></li><li><a href='https://www.medicalnewstoday.com/articles/fish-substitute#summary' target='_blank' rel='noreferrer'>Medical News Today</a></li></ul><br>",
+        "ale-crustacean-shellfish": "<h2 style='list-style-type:none'>Shellfish Substitutes</h2><ul><li>Lean meats such as chicken/beef/pork</li><li>Tofu/tempeh (plant-based, may contain soy)</li><li>Grains (may contain gluten)</li><li>Beans</li><li>Peas</li><li>Lentils</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://lacrosseallergy.com/resources/diet-and-nutrition-counseling/allergen-free-diets/shellfish-free-diet/#:~:text=Nutrition%20Swap,%2C%20fin%20fish%2C%20eggs%2C%20dairy' target='_blank' rel='noreferrer'>La Crosse Allergy</a></li><li><a href='https://www.chla.org/sites/default/files/atoms/files/CHLA-Shellfish-Free-Diet-2016.pdf' target='_blank' rel='noreferrer'>Children's Hospital Los Angeles</a></li></ul><br>",
+        "ale-mollusks": "<h2 style='list-style-type:none'>Mollusk Substitutes</h2><ul><li>Teriyaki/fish sauce/worcestershire sauce (contains fish) FOR oyster sauce</li><li>Oyster mushrooms</li></ul><h2 style='list-style-type:none'>Sources</h2><ul><li><a href='https://erudus.com/editorial/the-food-agenda/allergen-deep-dive-molluscs#:~:text=What%27s%20an%20alternative%20for%20Molluscs,makes%20them%20incredibly%20similar%20looking.' target='_blank' rel='noreferrer'>Erudus</a></li></ul><br>",
+    };
+
+    // ale
+    // as suggested, should be prioritized first and be visible immediately on results display
+    let allergenUl = document.createElement("ul");
+    let allergenSubstitutesSpan = document.createElement("span");
+    allergenUl.style = "list-style-type: none;";
+    let showAllergenBool = false;
+    
+    for (var prop in aleArray) {
+        if (containsProperty(aleArray[prop])) {
+            let e = document.createElement("li");
+            e.innerHTML = `<b><span style="color: #3cbd44;">${aleArray[prop].substring(4)}</span></b>`;
+            allergenUl.append(e);
+
+            allergenSubstitutesVisibility.style.display = "block";
+            let f = document.createElement("span");
+            f.innerHTML = aleSubstitutesDict[aleArray[prop]];
+            allergenSubstitutesSpan.append(f);
+
+            showAllergenBool = true;
+        }
+    }
+
+    if (showAllergenBool) {
+        let allergenHeader = document.createElement("li");
+        allergenHeader.innerHTML = "<h3>Allergen information:</h3>";
+        resultList.appendChild(allergenHeader);
+        let liContainingUl = document.createElement("li")
+        liContainingUl.style = "list-style-type: none;";
+        liContainingUl.appendChild(allergenUl);
+        resultList.appendChild(liContainingUl);
+        allergenAndContains.appendChild(resultList);
+    }
 
     // res
     let restrictionUl = document.createElement("ul");
@@ -227,36 +298,7 @@ function viewRestrictions(pred, res) {
         liContainingUl.style = "list-style-type: none;";
         liContainingUl.appendChild(restrictionUl);
         resultList.appendChild(liContainingUl);
-        dietaryRestrictions.appendChild(resultList);
-    } else {
-        console.log("NONE");
-    }
-
-    // ale
-    let allergenUl = document.createElement("ul");
-    allergenUl.style = "list-style-type: none;";
-    let showAllergenBool = false;
-    
-    for (var prop in aleArray) {
-        if (containsProperty(aleArray[prop])) {
-            let e = document.createElement("li");
-            e.innerHTML = `<b><span style="color: #3cbd44;">${aleArray[prop].substring(4)}</span></b>`;
-            allergenUl.append(e);
-            showAllergenBool = true;
-        }
-    }
-
-    if (showAllergenBool) {
-        let allergenHeader = document.createElement("li");
-        allergenHeader.innerHTML = "<h3>Allergen information:</h3>";
-        resultList.appendChild(allergenHeader);
-        let liContainingUl = document.createElement("li")
-        liContainingUl.style = "list-style-type: none;";
-        liContainingUl.appendChild(allergenUl);
-        resultList.appendChild(liContainingUl);
-        dietaryRestrictions.appendChild(resultList);
-    } else {
-        console.log("NONE");
+        allergenAndContains.appendChild(resultList);
     }
 
     // others
@@ -279,11 +321,17 @@ function viewRestrictions(pred, res) {
     }
 
     if (resultList.hasChildNodes()) {
-        dietaryRestrictions.appendChild(resultList);
+        allergenAndContains.innerHTML = "";
+        allergenSubstitutes.innerHTML = "";
+        allergenAndContains.appendChild(resultList);
+        allergenSubstitutes.appendChild(allergenSubstitutesSpan);
     } else {
         noResultsSpan = document.createElement("span");
         noResultsSpan.innerHTML = "";
-        dietaryRestrictions.appendChild(noResultsSpan);
+        allergenAndContains.innerHTML = "";
+        allergenSubstitutes.innerHTML = "";
+        allergenAndContains.appendChild(noResultsSpan);
+        allergenSubstitutes.appendChild(noResultsSpan);
     }
 }
 
@@ -295,7 +343,6 @@ function viewEx(exnumViewEx, res) {
     let ex5JSON = JSON.parse(ex5JSONString.innerHTML);
 
     let exList = [ex1JSON, ex2JSON, ex3JSON, ex4JSON, ex5JSON];
-
     let exDiv = document.createElement("div");
 
     function fs(s) {
@@ -304,25 +351,21 @@ function viewEx(exnumViewEx, res) {
 
     // AGE
     // 17-29, 30-45, and 46-60
-    if (res["user-age"] < 17) {
+    if (res["user-age"] < 17)
         exDiv.innerHTML = `<b>There are no exercise recommendations for your age.</b><br><br>`;
-    } else if (res["user-age"] <= 29) {
+    else if (res["user-age"] <= 29)
         exDiv.innerHTML = fs(`${exList[exnumViewEx - 1]["young"]}`);
-    } else if (res["user-age"] >= 30 && res["user-age"] <= 45) {
+    else if (res["user-age"] >= 30 && res["user-age"] <= 45)
         exDiv.innerHTML = fs(`${exList[exnumViewEx - 1]["middle"]}`);
-    } else if (res["user-age"] >= 46 && res["user-age"] <= 60) {
+    else if (res["user-age"] >= 46 && res["user-age"] <= 60)
         exDiv.innerHTML = fs(`${exList[exnumViewEx - 1]["old"]}`);
-    } else if (res["user-age"] > 60) {
+    else if (res["user-age"] > 60)
         exDiv.innerHTML = `<b>There are no exercise recommendations for your age.</b><br><br>`;
-    } else {
+    else
         exDiv.innerHTML = `<b>No age provided.</b><br><br>`;
-    }
 
     dietaryRestrictions.appendChild(document.createElement("br"))
     dietaryRestrictions.appendChild(exDiv);
-}
-
-function detailsButtonToggle(num) {
 }
 
 function viewDetails(prediction, recipe, simres, exnum) {
@@ -334,7 +377,7 @@ function viewDetails(prediction, recipe, simres, exnum) {
         let sf = 1000000;
         return Math.round((simres["scores"][pos] + Number.EPSILON) * lf) / sf;
     }
-    
+
     function fsfp(pos, simres) {
         // format similar foods percentages
         y = pos - 1;
@@ -354,6 +397,7 @@ function viewDetails(prediction, recipe, simres, exnum) {
     ingredientsAndRecipeHeader.innerHTML = `Ingredients and recipe for: ${prediction.innerHTML}</b>`;
 
     // similar food
+    // sselesu
     similarFoodsHeader.innerHTML = `Foods similar to ${prediction.innerHTML} (based on the similarity of the recipes):`;
 
     s = JSON.parse(simres.innerHTML);
@@ -372,6 +416,31 @@ function viewDetails(prediction, recipe, simres, exnum) {
     for (let i = 0; i < detailsButtons.length; i++)
         detailsButtons[i].style.visibility = "visible";
     detailsButtons[exnum - 1].style.visibility = "hidden";
+
+    if (prediction.innerHTML == "none") {
+        let containerResults = document.getElementsByClassName("container-results")[0];
+        let predictions = document.getElementsByClassName("predictions")[0];
+        predictions.style.display = "none";
+        let solid = document.getElementsByClassName("solid");
+        for (let i = 0; i < solid.length; i++)
+            solid[i].style.display = "none";
+        allergenAndContains.style.display = "none";
+        ingredientsAndRecipeHeader.style.display = "none";
+        ingredientsAndRecipe.style.display = "none";
+        allergenSubstitutesVisibility.style.display = "none";
+        dietaryRestrictionsHeader.style.display = "none";
+        yourRestrictions.style.display = "none";
+        dietaryRestrictions.style.display = "none";
+
+        let goBackAnchor = document.getElementById("go-back-anchor");
+        goBackAnchor.remove();
+
+        let noFood = document.createElement("p");
+        noFood.innerHTML = "<br><br><b style='color: red;'>No food detected in the image.</b><br><br>It seems that the image you provided does not contain any recognizable food items.<br>Please go back and try again with a different image that shows food.<br><br><br><br>";
+        noFood.style.textAlign = "justify";
+        containerResults.append(noFood);
+        containerResults.appendChild(goBackAnchor);
+    }
 }
 
 function z(kl) {

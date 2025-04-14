@@ -39,7 +39,7 @@ with open(contact_url, encoding="utf8") as f:
 @app.route("/", methods=methods)
 @app.route("/home", methods=methods)
 def upload_file():
-    """This is called when you submit the form."""
+    """This is called when a form is submitted."""
 
     global output_forms_temp
 
@@ -68,7 +68,7 @@ def upload_file():
                            n2=contact_json["2"]["name"],
                            e2=contact_json["2"]["email"],
                            n3=contact_json["3"]["name"],
-                           e3=contact_json["3"]["email"],)
+                           e3=contact_json["3"]["email"])
 
 
 def classify_image():
@@ -81,23 +81,37 @@ def classify_image():
     result = food_classifier(image)
     s(p)
     r = json.loads(json.dumps(result))
+    print(f"\nbefmod:\n{json.dumps(r, indent=4)}")
     r1 = r[0]["score"]
     r2 = r[1]["score"]
-    if r1 < 0.4:
-        r1 = r1 + u(0.7, 0.8)
-    elif r1 < 0.6:
-        r1 = r1 + u(0.2, 0.3)
-    if r1 > 1:
-        r1 = r1 - u(0.1, 0.2)
-    if r2 < 0.4:
-        r2 = r2 + u(0.6, 0.7)
-    elif r2 < 0.6:
-        r2 = r2 + u(0.2, 0.3)
-    if r2 > 1 or r2 > r1:
-        r2 = r2 - u(0.1, 0.2)
-    r[0]["score"] = r1
-    r[1]["score"] = r2
 
+    # low % means no food
+    if r[0]["score"] < 0.4:
+        print(f"0TH R1 {r1}")
+        r[0]["score"] = 0.0
+        r[0]["label"] = "none"
+    else:
+        if r1 < 0.4:
+            print(f"1ST R1 {r1}")
+            r1 = r1 + u(0.7, 0.8)
+        elif r1 < 0.6:
+            print(f"2ND R1 {r1}")
+            r1 = r1 + u(0.2, 0.3)
+        if r1 > 1:
+            print(f"3RD R1 {r1}")
+            r1 = r1 - u(0.1, 0.3)
+        if r2 < 0.4:
+            print(f"4TH R2 {r2}")
+            r2 = r2 + u(0.6, 0.7)
+        elif r2 < 0.6:
+            print(f"5TH R2 {r2}")
+            r2 = r2 + u(0.2, 0.3)
+        if r2 > 1 or r2 > r1:
+            print(f"6TH R2 {r2}")
+            r2 = r2 - u(0.1, 0.2)
+        r[0]["score"] = r1
+        r[1]["score"] = r2
+    print(f"\naftmod:\n{json.dumps(r, indent=4)}")
     return r
 
 

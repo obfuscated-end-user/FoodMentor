@@ -633,3 +633,7 @@ input[type="checkbox"]:checked:after {
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 }
+
+.broken-underline {
+    text-decoration: underline #fff dotted;
+}
